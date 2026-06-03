@@ -35,12 +35,7 @@ interface PaginatedResponse<T> {
 ### Common Types
 
 ```typescript
-import {
-  User,
-  AuthToken,
-  ErrorResponse,
-  PaginationParams,
-} from '@monorepo/shared-types';
+import { User, AuthToken, ErrorResponse, PaginationParams } from '@monorepo/shared-types';
 
 // User interface
 interface User {
@@ -122,7 +117,7 @@ export class ApiController {
   @Get('health')
   async getHealth(): Promise<ApiResponse> {
     const now = new Date();
-    
+
     return {
       success: true,
       data: {
@@ -136,7 +131,7 @@ export class ApiController {
   @Get('users')
   async getUsers(): Promise<PaginatedResponse<User>> {
     // ... fetch users
-    
+
     return {
       items: users,
       total: 100,
@@ -166,11 +161,13 @@ app.get('/api/health', (req: Request, res: Response) => {
 ## How Types and Utils Are Shared
 
 1. **Workspace Configuration**: Both `package.json` files declare:
+
    ```json
    "workspaces": ["apps/frontend/*", "apps/backend/*", "packages/*"]
    ```
 
 2. **TypeScript Paths**: Root `tsconfig.json` includes:
+
    ```json
    "paths": {
      "@monorepo/shared-types": ["packages/shared-types/src/index.ts"],
@@ -189,22 +186,26 @@ app.get('/api/health', (req: Request, res: Response) => {
 ## How to Build and Test
 
 ### Build Specific Package
+
 ```bash
 pnpm --filter @monorepo/shared-types build
 pnpm --filter @monorepo/shared-utils build
 ```
 
 ### Type Check All Projects
+
 ```bash
 pnpm type-check
 ```
 
 ### Type Check Specific Backend
+
 ```bash
 pnpm --filter @monorepo/lev-hedva-api type-check
 ```
 
 ### Build All
+
 ```bash
 pnpm build
 ```
@@ -214,6 +215,7 @@ pnpm build
 ### Adding a New Type
 
 1. Edit `packages/shared-types/src/index.ts`:
+
    ```typescript
    export interface MyNewType {
      // properties
@@ -228,6 +230,7 @@ pnpm build
 ### Adding a New Utility Function
 
 1. Edit `packages/shared-utils/src/index.ts`:
+
    ```typescript
    export const myUtilFunction = (param: string): string => {
      // implementation
@@ -254,7 +257,7 @@ The `@monorepo/lev-hedva-api` backend demonstrates shared package usage:
 ✅ **Code Reuse**: Avoid duplicating utility functions  
 ✅ **Maintainability**: Update once, used everywhere  
 ✅ **Consistency**: All APIs follow the same response format  
-✅ **Development Speed**: Common patterns are pre-built  
+✅ **Development Speed**: Common patterns are pre-built
 
 ## Troubleshooting
 
@@ -263,7 +266,7 @@ The `@monorepo/lev-hedva-api` backend demonstrates shared package usage:
 If you get "Cannot find module '@monorepo/shared-types'":
 
 1. Check `pnpm install` has run: `pnpm install`
-2. Verify `package.json` has dependency: 
+2. Verify `package.json` has dependency:
    ```json
    "@monorepo/shared-types": "workspace: *"
    ```
@@ -275,6 +278,7 @@ If you get "Cannot find module '@monorepo/shared-types'":
 ### Type Errors After Adding to Shared Packages
 
 Run type-check to catch issues early:
+
 ```bash
 pnpm type-check
 ```
@@ -282,6 +286,7 @@ pnpm type-check
 ### Import Not Intellisensed in IDE
 
 Rebuild TypeScript declarations:
+
 ```bash
 pnpm --filter @monorepo/shared-types build
 pnpm --filter @monorepo/shared-utils build

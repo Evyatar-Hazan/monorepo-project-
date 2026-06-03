@@ -188,7 +188,11 @@ export class HttpClient {
 
       // Check for HTTP errors
       if (!response.ok) {
-        throw new HttpError(`HTTP ${response.status}: ${response.statusText}`, response.status, data);
+        throw new HttpError(
+          `HTTP ${response.status}: ${response.statusText}`,
+          response.status,
+          data
+        );
       }
 
       // Return response (ensure it has ApiResponse shape)
@@ -246,6 +250,9 @@ export class HttpError extends Error {
 /**
  * Create HTTP client instance
  */
-export function createHttpClient(config?: HttpClientConfig, options?: HttpClientOptions): HttpClient {
+export function createHttpClient(
+  config?: HttpClientConfig,
+  options?: HttpClientOptions
+): HttpClient {
   return new HttpClient(config, options);
 }

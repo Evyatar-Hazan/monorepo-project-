@@ -9,9 +9,20 @@ export interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElemen
 }
 
 export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
-  ({ variant = 'primary', size = 'medium', loading = false, fullWidth = false, className = '', ...props }, ref) => {
-    const baseStyles = 'font-semibold rounded transition-colors duration-200 disabled:opacity-50 disabled:cursor-not-allowed';
-    
+  (
+    {
+      variant = 'primary',
+      size = 'medium',
+      loading = false,
+      fullWidth = false,
+      className = '',
+      ...props
+    },
+    ref
+  ) => {
+    const baseStyles =
+      'font-semibold rounded transition-colors duration-200 disabled:opacity-50 disabled:cursor-not-allowed';
+
     const variantStyles = {
       primary: 'bg-blue-600 text-white hover:bg-blue-700 active:bg-blue-800',
       secondary: 'bg-gray-200 text-gray-900 hover:bg-gray-300 active:bg-gray-400',
@@ -29,12 +40,7 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
     const classes = `${baseStyles} ${variantStyles[variant]} ${sizeStyles[size]} ${widthStyle} ${className}`;
 
     return (
-      <button
-        ref={ref}
-        disabled={loading || props.disabled}
-        className={classes}
-        {...props}
-      >
+      <button ref={ref} disabled={loading || props.disabled} className={classes} {...props}>
         {loading ? '⏳ Loading...' : props.children}
       </button>
     );

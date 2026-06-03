@@ -25,9 +25,7 @@ export interface GoogleTokenPayload {
   exp: number;
 }
 
-export const verifyGoogleToken = async (
-  idToken: string
-): Promise<GoogleTokenPayload | null> => {
+export const verifyGoogleToken = async (idToken: string): Promise<GoogleTokenPayload | null> => {
   try {
     const ticket = await googleClient.verifyIdToken({
       idToken,

@@ -22,7 +22,11 @@ export const Loader = React.forwardRef<HTMLDivElement, LoaderProps>(
     };
 
     return (
-      <div ref={ref} className={`flex flex-col items-center justify-center ${className}`} {...props}>
+      <div
+        ref={ref}
+        className={`flex flex-col items-center justify-center ${className}`}
+        {...props}
+      >
         <div className={`rounded-full animate-spin ${sizeStyles[size]} ${colorStyles[color]}`} />
         {text && <p className="mt-2 text-gray-600">{text}</p>}
       </div>

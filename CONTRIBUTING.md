@@ -1,6 +1,6 @@
 # Contributing to Evyatar Monorepo
 
-Thank you for contributing to this project! 
+Thank you for contributing to this project!
 
 ## 📋 Before You Start
 
@@ -83,6 +83,7 @@ chore:    Maintenance tasks, dependencies
 ```
 
 Examples:
+
 ```bash
 git commit -m "feat: add dark mode to web-portfolio"
 git commit -m "fix: resolve TypeScript errors in lev-hedva-api"
@@ -92,12 +93,14 @@ git commit -m "docs: update README with new setup instructions"
 ## 🎯 Pull Request Process
 
 1. **Fill out the PR template** with:
+
    - What changes you made
    - Why you made them
    - Any relevant issue numbers
    - Testing instructions
 
 2. **Ensure CI passes**:
+
    - ✅ All checks pass
    - ✅ No linting errors
    - ✅ TypeScript builds successfully
@@ -153,6 +156,7 @@ pnpm add -D -w turbo
 ## 🆘 Questions?
 
 Check:
+
 - [DEVELOPMENT.md](./DEVELOPMENT.md) for setup
 - [README.md](./README.md) for overview
 - Individual app READMEs for specific guidance

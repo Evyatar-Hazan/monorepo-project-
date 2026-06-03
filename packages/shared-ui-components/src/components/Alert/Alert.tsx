@@ -9,7 +9,10 @@ export interface AlertProps extends React.HTMLAttributes<HTMLDivElement> {
 }
 
 export const Alert = React.forwardRef<HTMLDivElement, AlertProps>(
-  ({ type = 'info', title, closable = false, onClose, className = '', children, ...props }, ref) => {
+  (
+    { type = 'info', title, closable = false, onClose, className = '', children, ...props },
+    ref
+  ) => {
     const [visible, setVisible] = React.useState(true);
 
     const typeStyles = {

@@ -29,7 +29,9 @@ export const Modal: React.FC<ModalProps> = ({
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
-      <div className={`bg-white rounded-lg shadow-lg ${sizeStyles[size]} max-h-[90vh] overflow-y-auto ${className}`}>
+      <div
+        className={`bg-white rounded-lg shadow-lg ${sizeStyles[size]} max-h-[90vh] overflow-y-auto ${className}`}
+      >
         {/* Header */}
         <div className="flex justify-between items-center border-b p-6">
           <h2 className="text-xl font-semibold">{title || 'Modal'}</h2>
@@ -42,16 +44,10 @@ export const Modal: React.FC<ModalProps> = ({
         </div>
 
         {/* Content */}
-        <div className="p-6">
-          {children}
-        </div>
+        <div className="p-6">{children}</div>
 
         {/* Footer */}
-        {footer && (
-          <div className="border-t p-6 flex justify-end gap-2">
-            {footer}
-          </div>
-        )}
+        {footer && <div className="border-t p-6 flex justify-end gap-2">{footer}</div>}
       </div>
     </div>
   );

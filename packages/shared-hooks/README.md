@@ -194,6 +194,7 @@ const { data, loading, error, refetch } = useApi<T>(
 ```
 
 **Return:**
+
 - `data`: The fetched data (null if not loaded)
 - `loading`: Loading state
 - `error`: Error message (null if no error)
@@ -208,6 +209,7 @@ const { user, isAuthenticated, token, login, logout, updateUser } = useAuth();
 ```
 
 **Return:**
+
 - `user`: Authenticated user object (null if not logged in)
 - `isAuthenticated`: Boolean indicating if user is authenticated
 - `token`: Auth token object (null if not logged in)
@@ -224,6 +226,7 @@ const pagination = usePagination(pageSize?: number);
 ```
 
 **Return:**
+
 - `page`: Current page number
 - `pageSize`: Items per page
 - `total`: Total items
@@ -246,6 +249,7 @@ const { value, setValue, removeValue } = useLocalStorage<T>(key: string, default
 ```
 
 **Return:**
+
 - `value`: Stored value or default
 - `setValue(value)`: Store or update value
 - `removeValue()`: Remove stored value
@@ -259,6 +263,7 @@ const debouncedValue = useDebounce<T>(value: T, delay?: number);
 ```
 
 **Return:**
+
 - Debounced value
 
 ## Building

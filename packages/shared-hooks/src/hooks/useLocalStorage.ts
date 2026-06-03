@@ -13,7 +13,7 @@ export function useLocalStorage<T = any>(key: string, defaultValue?: T): UseLoca
   const [value, setValue] = useState<T | null>(() => {
     try {
       const item = localStorage.getItem(key);
-      return item ? JSON.parse(item) : (defaultValue ?? null);
+      return item ? JSON.parse(item) : defaultValue ?? null;
     } catch (error) {
       console.error(`Error reading localStorage key "${key}":`, error);
       return defaultValue ?? null;

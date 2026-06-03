@@ -46,13 +46,16 @@ export function useAuth(): UseAuthReturn {
     localStorage.removeItem('auth_token');
   }, []);
 
-  const updateUser = useCallback((updates: Partial<User>) => {
-    if (user) {
-      const updated = { ...user, ...updates };
-      setUser(updated);
-      localStorage.setItem('auth_user', JSON.stringify(updated));
-    }
-  }, [user]);
+  const updateUser = useCallback(
+    (updates: Partial<User>) => {
+      if (user) {
+        const updated = { ...user, ...updates };
+        setUser(updated);
+        localStorage.setItem('auth_user', JSON.stringify(updated));
+      }
+    },
+    [user]
+  );
 
   return {
     user,

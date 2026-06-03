@@ -5,12 +5,12 @@ import { User, UserResponse } from '../models/User';
 
 // סודות - במציאות יהיו במשתני סביבה
 const JWT_SECRET = process.env.JWT_SECRET || 'your-secret-key-here';
-const JWT_REFRESH_SECRET = process.env.JWT_REFRESH_SECRET || 'your-refresh-secret-key-here';
+const JWT_REFRESH_SECRET =
+  process.env.JWT_REFRESH_SECRET || 'your-refresh-secret-key-here';
 const _JWT_EXPIRES_IN = process.env.JWT_EXPIRES_IN || '1h';
 const _JWT_REFRESH_EXPIRES_IN = process.env.JWT_REFRESH_EXPIRES_IN || '7d';
 
 export class AuthService {
-  
   // הצפנת סיסמה
   static async hashPassword(password: string): Promise<string> {
     const saltRounds = 12;
@@ -18,7 +18,10 @@ export class AuthService {
   }
 
   // בדיקת סיסמה
-  static async comparePassword(password: string, hashedPassword: string): Promise<boolean> {
+  static async comparePassword(
+    password: string,
+    hashedPassword: string
+  ): Promise<boolean> {
     return await bcrypt.compare(password, hashedPassword);
   }
 
@@ -45,7 +48,9 @@ export class AuthService {
   // אימות Refresh token
   static verifyRefreshToken(token: string): { userId: string } | null {
     try {
-      const decoded = jwt.verify(token, JWT_REFRESH_SECRET) as { userId: string };
+      const decoded = jwt.verify(token, JWT_REFRESH_SECRET) as {
+        userId: string;
+      };
       return decoded;
     } catch (error) {
       return null;
@@ -73,7 +78,7 @@ export class AuthService {
       createdAt: user.createdAt,
       lastLoginAt: user.lastLoginAt,
       followers: user.followers ?? [],
-      following: user.following ?? []
+      following: user.following ?? [],
     };
   }
 
@@ -85,7 +90,8 @@ export class AuthService {
 
   // ולידציית סיסמה (לפחות 8 תווים, אות גדולה, אות קטנה, מספר)
   static isValidPassword(password: string): boolean {
-    const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d@$!%*?&]{8,}$/;
+    const passwordRegex =
+      /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d@$!%*?&]{8,}$/;
     return passwordRegex.test(password);
   }
 

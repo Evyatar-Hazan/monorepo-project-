@@ -93,13 +93,13 @@ apiClient.clearAuthToken();
 apiClient.addRequestInterceptor({
   onRequest: async (config) => {
     console.log('Outgoing request:', config);
-    
+
     // Modify config as needed
     config.headers = {
       ...config.headers,
       'X-Request-ID': Math.random().toString(),
     };
-    
+
     return config;
   },
   onError: async (error) => {
@@ -115,22 +115,22 @@ apiClient.addRequestInterceptor({
 apiClient.addResponseInterceptor({
   onResponse: async (response, data) => {
     console.log('Response received:', response.status, data);
-    
+
     // Transform data as needed
     if (Array.isArray(data)) {
-      return data.map(item => ({ ...item, _received: new Date() }));
+      return data.map((item) => ({ ...item, _received: new Date() }));
     }
-    
+
     return data;
   },
   onError: async (error) => {
     console.error('Response error:', error);
-    
+
     // Handle specific errors
     if (error.message.includes('401')) {
       // Handle unauthorized
     }
-    
+
     return error;
   },
 });
@@ -147,10 +147,10 @@ const apiClient = createHttpClient(
         onError: async (error) => {
           // Log all errors
           console.error('API Error:', error);
-          
+
           // Show toast notification
           // showErrorToast(error.message);
-          
+
           return error;
         },
       },
@@ -193,7 +193,7 @@ const response = await apiClient.get('/export');
 ```typescript
 try {
   const response = await apiClient.post('/users', userData);
-  
+
   if (!response.success) {
     console.error('API Error:', response.error);
     // Handle API error
@@ -210,8 +210,8 @@ try {
 
 ```typescript
 interface HttpClientConfig {
-  baseUrl?: string;      // Base URL for all requests
-  timeout?: number;      // Request timeout in milliseconds (default: 30000)
+  baseUrl?: string; // Base URL for all requests
+  timeout?: number; // Request timeout in milliseconds (default: 30000)
   headers?: Record<string, string>; // Default headers
 }
 ```

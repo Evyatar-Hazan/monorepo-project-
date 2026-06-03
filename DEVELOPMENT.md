@@ -3,7 +3,8 @@
 ## 🚀 First Time Setup
 
 ### Prerequisites
-- Node.js 18+ 
+
+- Node.js 18+
 - pnpm 9+
 
 ### Installation
@@ -25,6 +26,7 @@ pnpm add -g turbo
 ## 📦 Development Commands
 
 ### Running All Projects
+
 ```bash
 pnpm dev              # Start all apps in dev mode (recommended)
 pnpm build            # Build all projects
@@ -114,7 +116,7 @@ import type { ApiResponse, User, PaginatedResponse } from '@monorepo/shared-type
 
 const response: ApiResponse<User> = {
   success: true,
-  data: { id: '1', email: 'user@example.com' }
+  data: { id: '1', email: 'user@example.com' },
 };
 ```
 
@@ -168,6 +170,7 @@ pnpm install
 ## ⚙️ Configuration Files
 
 ### tsconfig.json in apps
+
 Reference shared configs:
 
 ```json
@@ -189,7 +192,7 @@ Reference shared configs:
 ```javascript
 export default [
   {
-    ignores: ['dist', '.turbo', 'node_modules']
+    ignores: ['dist', '.turbo', 'node_modules'],
   },
   // ... custom rules
 ];
@@ -198,6 +201,7 @@ export default [
 ## 🔄 Dependency Management
 
 ### pnpm Features
+
 - **Workspace**: Automatic linking between local packages
 - **Phantom dependencies**: Strict mode prevents accessing transitive deps
 - **Storage**: Efficient hard-linked node_modules
@@ -239,6 +243,7 @@ pnpm build  # Rebuild from scratch
 ### Port conflicts in dev
 
 Each app uses a different default port:
+
 - web-portfolio: 5173
 - lev-chedva-website: 5174
 - emergency-protocol-diagram: 5175
@@ -248,6 +253,7 @@ Each app uses a different default port:
 - lev-chedva-admin: 3002
 
 Override with:
+
 ```bash
 pnpm --filter web-portfolio dev -- --port 5000
 ```

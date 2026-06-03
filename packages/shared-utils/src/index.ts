@@ -35,7 +35,7 @@ export const formatTime = (date: Date, locale = 'en-US'): string => {
 };
 
 // Array utilities
-export const chunk = <T,>(arr: T[], size: number): T[][] => {
+export const chunk = <T>(arr: T[], size: number): T[][] => {
   const chunks: T[][] = [];
   for (let i = 0; i < arr.length; i += size) {
     chunks.push(arr.slice(i, i + size));
@@ -43,12 +43,12 @@ export const chunk = <T,>(arr: T[], size: number): T[][] => {
   return chunks;
 };
 
-export const unique = <T,>(arr: T[]): T[] => {
+export const unique = <T>(arr: T[]): T[] => {
   return Array.from(new Set(arr));
 };
 
 // Object utilities
-export const pick = <T, K extends keyof T,>(obj: T, keys: K[]): Pick<T, K> => {
+export const pick = <T, K extends keyof T>(obj: T, keys: K[]): Pick<T, K> => {
   const result = {} as Pick<T, K>;
   keys.forEach((key) => {
     result[key] = obj[key];
@@ -56,7 +56,7 @@ export const pick = <T, K extends keyof T,>(obj: T, keys: K[]): Pick<T, K> => {
   return result;
 };
 
-export const omit = <T, K extends keyof T,>(obj: T, keys: K[]): Omit<T, K> => {
+export const omit = <T, K extends keyof T>(obj: T, keys: K[]): Omit<T, K> => {
   const result = { ...obj };
   keys.forEach((key) => {
     delete result[key];

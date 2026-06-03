@@ -5,6 +5,7 @@ Shared React UI components library for all frontend applications in the monorepo
 ## Components
 
 ### Button
+
 Flexible button component with multiple variants and sizes.
 
 ```tsx
@@ -20,12 +21,14 @@ export function MyComponent() {
 ```
 
 **Props:**
+
 - `variant`: 'primary' | 'secondary' | 'danger' | 'success' (default: 'primary')
 - `size`: 'small' | 'medium' | 'large' (default: 'medium')
 - `loading`: boolean (default: false)
 - `fullWidth`: boolean (default: false)
 
 ### Input
+
 Text input component with label, error states, and helper text.
 
 ```tsx
@@ -45,12 +48,14 @@ export function MyComponent() {
 ```
 
 **Props:**
+
 - `label`: string
 - `error`: string
 - `helperText`: string
 - `fullWidth`: boolean (default: false)
 
 ### Card
+
 Container component for grouping content with shadow and padding options.
 
 ```tsx
@@ -66,12 +71,14 @@ export function MyComponent() {
 ```
 
 **Props:**
+
 - `title`: string
 - `subtitle`: string
 - `shadow`: 'sm' | 'md' | 'lg' (default: 'md')
 - `padding`: 'sm' | 'md' | 'lg' (default: 'md')
 
 ### Alert
+
 Alert/notification component for displaying messages.
 
 ```tsx
@@ -87,12 +94,14 @@ export function MyComponent() {
 ```
 
 **Props:**
+
 - `type`: 'success' | 'error' | 'warning' | 'info' (default: 'info')
 - `title`: string
 - `closable`: boolean (default: false)
 - `onClose`: () => void
 
 ### Loader
+
 Loading spinner component with customizable size and color.
 
 ```tsx
@@ -104,11 +113,13 @@ export function MyComponent() {
 ```
 
 **Props:**
+
 - `size`: 'small' | 'medium' | 'large' (default: 'medium')
 - `color`: 'blue' | 'gray' | 'green' | 'red' (default: 'blue')
 - `text`: string
 
 ### Modal
+
 Modal dialog component for displaying overlay content.
 
 ```tsx
@@ -129,7 +140,11 @@ export function MyComponent() {
             <Button variant="secondary" onClick={() => setOpen(false)}>
               Cancel
             </Button>
-            <Button onClick={() => { /* action */ setOpen(false); }}>
+            <Button
+              onClick={() => {
+                /* action */ setOpen(false);
+              }}
+            >
               Confirm
             </Button>
           </>
@@ -143,6 +158,7 @@ export function MyComponent() {
 ```
 
 **Props:**
+
 - `isOpen`: boolean
 - `title`: string
 - `onClose`: () => void
@@ -158,16 +174,19 @@ The components use Tailwind CSS for styling. Make sure your application has Tail
 All components are built with React and styled with Tailwind CSS. They support TypeScript and are fully typed.
 
 ### Building
+
 ```bash
 pnpm build
 ```
 
 ### Development
+
 ```bash
 pnpm dev
 ```
 
 ### Type Checking
+
 ```bash
 pnpm type-check
 ```
@@ -175,6 +194,7 @@ pnpm type-check
 ## Styling
 
 All components use Tailwind CSS classes for styling. The default color scheme includes:
+
 - **Primary**: Blue (#3B82F6)
 - **Success**: Green (#16A34A)
 - **Danger**: Red (#DC2626)
@@ -183,6 +203,7 @@ All components use Tailwind CSS classes for styling. The default color scheme in
 ## Contributing
 
 When adding new components:
+
 1. Create component in `src/components/ComponentName/ComponentName.tsx`
 2. Export from `src/index.ts`
 3. Add documentation to this README

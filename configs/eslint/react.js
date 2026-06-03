@@ -1,12 +1,12 @@
-import baseConfig from "./base.js";
+import baseConfig from './base.js';
 
 export default [
   ...baseConfig,
   {
-    files: ["**/*.{tsx,jsx}"],
+    files: ['**/*.{tsx,jsx}'],
     rules: {
-      "react/react-in-jsx-scope": "off",
-      "react/prop-types": "off"
-    }
-  }
+      'react/react-in-jsx-scope': 'off',
+      'react/prop-types': 'off',
+    },
+  },
 ];

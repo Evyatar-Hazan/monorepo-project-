@@ -9,30 +9,6 @@
     ".": {
       "types": "./dist/index.d.ts",
       "import": "./dist/index.js"
-    },
-    "./button": {
-      "types": "./dist/components/Button/Button.d.ts",
-      "import": "./dist/components/Button/Button.js"
-    },
-    "./input": {
-      "types": "./dist/components/Input/Input.d.ts",
-      "import": "./dist/components/Input/Input.js"
-    },
-    "./modal": {
-      "types": "./dist/components/Modal/Modal.d.ts",
-      "import": "./dist/components/Modal/Modal.js"
-    },
-    "./loader": {
-      "types": "./dist/components/Loader/Loader.d.ts",
-      "import": "./dist/components/Loader/Loader.js"
-    },
-    "./card": {
-      "types": "./dist/components/Card/Card.d.ts",
-      "import": "./dist/components/Card/Card.js"
-    },
-    "./alert": {
-      "types": "./dist/components/Alert/Alert.d.ts",
-      "import": "./dist/components/Alert/Alert.js"
     }
   },
   "scripts": {

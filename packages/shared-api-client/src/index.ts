@@ -1,7 +1,7 @@
-export { HttpClient, HttpError, createHttpClient } from './HttpClient';
+export { HttpClient, HttpError, createHttpClient } from './HttpClient.js';
 export type {
   RequestInterceptor,
   ResponseInterceptor,
   HttpClientConfig,
   HttpClientOptions,
-} from './HttpClient';
+} from './HttpClient.js';

@@ -5,15 +5,18 @@
 ## What Was Done
 
 ### 1. ✅ Monorepo Infrastructure
+
 - [x] Created root `package.json` with workspaces configuration
 - [x] Set up **Turborepo** for task orchestration
 - [x] Configured **pnpm** as package manager
 - [x] Created `.npmrc`, `pnpm-workspace.yaml`, and `.gitignore`
 
 ### 2. ✅ Directory Reorganization
+
 Moved all 15 projects into logical folders:
 
 **Frontend Apps (7)** → `apps/frontend/`
+
 - ✅ web-portfolio (Evyatar-Hazan)
 - ✅ lev-chedva-website
 - ✅ emergency-protocol-diagram
@@ -23,30 +26,36 @@ Moved all 15 projects into logical folders:
 - ✅ lev-chedva-admin
 
 **Backend Apps (4)** → `apps/backend/`
+
 - ✅ emergency-protocol-server
 - ✅ uh-shoham-server
 - ✅ test-yourself-api
 - ✅ lev-hedva-api
 
 **Archived** → `archive/`
+
 - Converter (static HTML)
 - Evyatar-Hazan.github.io
 - weather-sense (Python)
 - project-monorypo (empty)
 
 ### 3. ✅ Shared Packages Created
+
 - [x] `@monorepo/shared-types` - Shared TypeScript types
 - [x] `@monorepo/shared-utils` - Common utilities
 - [x] `@monorepo/config-typescript` - TypeScript configs
 - [x] `@monorepo/config-eslint` - ESLint configs
 
 ### 4. ✅ Scripts Standardization
+
 Added to all projects:
+
 - `type-check` - TypeScript validation
 - `clean` - Clean build artifacts
 - `format` - Code formatting
 
 ### 5. ✅ Configuration Files
+
 - [x] `.vscode/settings.json` - VS Code config
 - [x] `.vscode/extensions.json` - Recommended extensions
 - [x] `.prettierrc` - Prettier config
@@ -54,25 +63,27 @@ Added to all projects:
 - [x] `.github/workflows/ci.yml` - CI/CD pipeline
 
 ### 6. ✅ Documentation
+
 - [x] `README.md` - Main monorepo overview
 - [x] `DEVELOPMENT.md` - Development guide
 - [x] `CONTRIBUTING.md` - Contribution guidelines
 
 ## 📊 Before & After
 
-| Aspect | Before | After |
-|--------|--------|-------|
-| Structure | 15 separate folders | Organized by type |
-| Package Manager | npm/yarn mix | **pnpm** |
-| Build System | Individual configs | **Turborepo** |
-| Shared Code | Duplicated | **@monorepo packages** |
-| Scripts | Inconsistent | **Standardized** |
-| CI/CD | None | **GitHub Actions** |
-| Documentation | Minimal | **Comprehensive** |
+| Aspect          | Before              | After                  |
+| --------------- | ------------------- | ---------------------- |
+| Structure       | 15 separate folders | Organized by type      |
+| Package Manager | npm/yarn mix        | **pnpm**               |
+| Build System    | Individual configs  | **Turborepo**          |
+| Shared Code     | Duplicated          | **@monorepo packages** |
+| Scripts         | Inconsistent        | **Standardized**       |
+| CI/CD           | None                | **GitHub Actions**     |
+| Documentation   | Minimal             | **Comprehensive**      |
 
 ## 🚀 Next Steps
 
 ### Immediate (Optional)
+
 ```bash
 # 1. Navigate to monorepo
 cd /Users/evyatarhazan/Desktop/project/Evyatar
@@ -85,6 +96,7 @@ pnpm dev
 ```
 
 ### Later Enhancements
+
 - [ ] Migrate CRA apps (hebrew-schedule, test-yourself, lev-chedva-admin) to Vite
 - [ ] Create shared UI components package
 - [ ] Add E2E testing with Playwright
@@ -102,13 +114,14 @@ pnpm dev
 ## 🎯 Shared Packages Now in Use
 
 ✅ **@monorepo/shared-types** is actively used in:
+
 - `@monorepo/lev-hedva-api` (ApiResponse, PaginatedResponse types)
 
 ✅ **@monorepo/shared-utils** is actively used in:
+
 - `@monorepo/lev-hedva-api` (formatTime, clamp functions)
 
-📖 See [SHARED_PACKAGES_GUIDE.md](SHARED_PACKAGES_GUIDE.md) for complete documentation on using shared packages.
-6. **Easy Scaling** - Add new projects to `apps/{frontend|backend}`
+📖 See [SHARED_PACKAGES_GUIDE.md](SHARED_PACKAGES_GUIDE.md) for complete documentation on using shared packages. 6. **Easy Scaling** - Add new projects to `apps/{frontend|backend}`
 
 ## 📝 Important Notes
 

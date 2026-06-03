@@ -50,11 +50,11 @@ app.use((_req: Request, res: Response, next: NextFunction) => {
   res.setHeader('Access-Control-Allow-Credentials', 'true');
   res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, PATCH, OPTIONS');
   res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
-  
+
   // Allow postMessage from Google OAuth
   res.setHeader('Cross-Origin-Opener-Policy', 'same-origin-allow-popups');
   res.setHeader('Cross-Origin-Embedder-Policy', 'require-corp');
-  
+
   next();
 });
 
@@ -92,12 +92,14 @@ app.get('/api/health', (_req: Request, res: Response<ApiResponse<object>>) => {
 app.get('/api/debug', (_req: Request, res: Response) => {
   const allKeys = Object.keys(process.env).sort();
   const filteredVars: Record<string, string> = {};
-  
-  allKeys.forEach((key) => {
-    if (key.toLowerCase().includes('database') ||
-        key.toLowerCase().includes('neon') ||
-        key.toLowerCase().includes('postgres') ||
-        key.toLowerCase().includes('url')) {
+
+  allKeys.forEach(key => {
+    if (
+      key.toLowerCase().includes('database') ||
+      key.toLowerCase().includes('neon') ||
+      key.toLowerCase().includes('postgres') ||
+      key.toLowerCase().includes('url')
+    ) {
       filteredVars[key] = process.env[key]?.substring(0, 50) || 'SET TO EMPTY';
     }
   });

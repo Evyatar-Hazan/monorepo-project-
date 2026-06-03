@@ -58,6 +58,7 @@ pnpm add -g turbo
 ## 🚀 Commands
 
 ### Development
+
 ```bash
 pnpm dev              # Run all apps in dev mode
 pnpm build            # Build all projects
@@ -68,6 +69,7 @@ pnpm type-check       # Type check all projects
 ```
 
 ### Workspace
+
 ```bash
 # Run command in specific workspace
 pnpm --filter web-portfolio dev
@@ -81,6 +83,7 @@ pnpm --filter web-portfolio add -D typescript
 ```
 
 ### Turborepo
+
 ```bash
 turbo run build --parallel
 turbo run dev -- --port 3000
@@ -89,28 +92,29 @@ turbo run lint --filter=web-portfolio
 
 ## 📱 Frontend Apps
 
-| שם | טכנולוגיה | פורט | תיאור |
-|-----|-----------|------|--------|
-| web-portfolio | Vite + React | 5173 | פורטפוליו אישי |
-| lev-chedva-website | Vite + React | 5174 | אתר המצפה לנתינה |
+| שם                         | טכנולוגיה    | פורט | תיאור            |
+| -------------------------- | ------------ | ---- | ---------------- |
+| web-portfolio              | Vite + React | 5173 | פורטפוליו אישי   |
+| lev-chedva-website         | Vite + React | 5174 | אתר המצפה לנתינה |
 | emergency-protocol-diagram | Vite + React | 5175 | דיאגרמת פרוטוקול |
-| online-converter | Vite + React | 5176 | מערך המרה בחינם |
-| hebrew-schedule | CRA | 3000 | לוח זמנים עברי |
-| test-yourself | CRA | 3001 | אפליקציה בדיקה |
-| lev-chedva-admin | CRA + MUI | 3002 | ממשק מנהל |
+| online-converter           | Vite + React | 5176 | מערך המרה בחינם  |
+| hebrew-schedule            | CRA          | 3000 | לוח זמנים עברי   |
+| test-yourself              | CRA          | 3001 | אפליקציה בדיקה   |
+| lev-chedva-admin           | CRA + MUI    | 3002 | ממשק מנהל        |
 
 ## 🖥️ Backend Apps
 
-| שם | טכנולוגיה | פורט | תיאור |
-|-----|-----------|------|--------|
+| שם                        | טכנולוגיה        | פורט | תיאור                    |
+| ------------------------- | ---------------- | ---- | ------------------------ |
 | emergency-protocol-server | Express + Prisma | 5000 | API ל-Emergency Protocol |
-| uh-shoham-server | Express + Prisma | 5001 | API שוהם |
-| test-yourself-api | Express | 5002 | API בדיקות |
-| lev-hedva-api | NestJS + Prisma | 5003 | API Lev Hedva |
+| uh-shoham-server          | Express + Prisma | 5001 | API שוהם                 |
+| test-yourself-api         | Express          | 5002 | API בדיקות               |
+| lev-hedva-api             | NestJS + Prisma  | 5003 | API Lev Hedva            |
 
 ## 🔗 Shared Packages
 
 ### @monorepo/shared-types
+
 - API responses types
 - User & Auth types
 - Common interfaces
@@ -120,6 +124,7 @@ import type { ApiResponse, User } from '@monorepo/shared-types';
 ```
 
 ### @monorepo/shared-utils
+
 - String utilities (capitalize, slugify)
 - Number utilities (formatNumber, clamp)
 - Date utilities (formatDate)
@@ -135,6 +140,7 @@ import { capitalize, formatDate } from '@monorepo/shared-utils';
 ### TypeScript
 
 Base config ב-`configs/typescript/base.json`:
+
 - ES2020 target
 - Strict mode
 
@@ -203,4 +209,5 @@ pnpm add -D -w turbo
 ## 📞 Support
 
 For questions or issues, check the individual app READMEs.
+
 # monorepo-project-
