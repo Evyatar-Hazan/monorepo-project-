@@ -1,0 +1,64 @@
+{
+  "name": "@monorepo/shared-hooks",
+  "version": "1.0.0",
+  "description": "Shared React hooks for common patterns across the monorepo",
+  "type": "module",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    },
+    "./useApi": {
+      "types": "./dist/hooks/useApi.d.ts",
+      "import": "./dist/hooks/useApi.js"
+    },
+    "./useAuth": {
+      "types": "./dist/hooks/useAuth.d.ts",
+      "import": "./dist/hooks/useAuth.js"
+    },
+    "./usePagination": {
+      "types": "./dist/hooks/usePagination.d.ts",
+      "import": "./dist/hooks/usePagination.js"
+    },
+    "./useLocalStorage": {
+      "types": "./dist/hooks/useLocalStorage.d.ts",
+      "import": "./dist/hooks/useLocalStorage.js"
+    },
+    "./useDebounce": {
+      "types": "./dist/hooks/useDebounce.d.ts",
+      "import": "./dist/hooks/useDebounce.js"
+    }
+  },
+  "scripts": {
+    "build": "tsc",
+    "type-check": "tsc --noEmit",
+    "dev": "tsc --watch",
+    "clean": "rm -rf dist"
+  },
+  "peerDependencies": {
+    "react": "^19.2.0",
+    "react-dom": "^19.2.0"
+  },
+  "dependencies": {
+    "@monorepo/shared-api-client": "workspace: *",
+    "@monorepo/shared-types": "workspace: *"
+  },
+  "devDependencies": {
+    "@types/react": "^19.0.0",
+    "@types/react-dom": "^19.0.0",
+    "react": "^19.2.0",
+    "react-dom": "^19.2.0",
+    "typescript": "~5.9.3"
+  },
+  "keywords": [
+    "react",
+    "hooks",
+    "custom-hooks",
+    "shared",
+    "monorepo"
+  ],
+  "author": "Evyatar Hazan",
+  "license": "MIT"
+}
