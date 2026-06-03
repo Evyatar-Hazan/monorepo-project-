@@ -8,21 +8,27 @@ export class EmailService {
     secure: false, // true ל-465, false לפורטים אחרים
     auth: {
       user: process.env.SMTP_USER || 'test@example.com',
-      pass: process.env.SMTP_PASS || 'password'
-    }
+      pass: process.env.SMTP_PASS || 'password',
+    },
   });
 
-  static async sendVerificationEmail(email: string, name: string, token: string): Promise<boolean> {
+  static async sendVerificationEmail(
+    email: string,
+    name: string,
+    token: string
+  ): Promise<boolean> {
     try {
       // במצב פיתוח, רק נדפיס ללוג במקום לשלוח מייל באמת
       if (process.env.NODE_ENV === 'development' || !process.env.SMTP_HOST) {
         console.log(`📧 [DEV] Verification email for ${email}:`);
-        console.log(`🔗 Verification link: ${process.env.CLIENT_URL || 'http://localhost:3000'}/verify-email?token=${token}`);
+        console.log(
+          `🔗 Verification link: ${process.env.CLIENT_URL || 'http://localhost:3000'}/verify-email?token=${token}`
+        );
         return true;
       }
 
       const verificationLink = `${process.env.CLIENT_URL || 'http://localhost:3000'}/verify-email?token=${token}`;
-      
+
       const mailOptions = {
         from: process.env.FROM_EMAIL || 'noreply@test-yourself.com',
         to: email,
@@ -50,7 +56,7 @@ export class EmailService {
               אם לא נרשמת לאתר שלנו, אנא התעלם ממייל זה.
             </p>
           </div>
-        `
+        `,
       };
 
       await this.transporter.sendMail(mailOptions);
@@ -62,10 +68,14 @@ export class EmailService {
     }
   }
 
-  static async sendPasswordResetEmail(email: string, name: string, token: string): Promise<boolean> {
+  static async sendPasswordResetEmail(
+    email: string,
+    name: string,
+    token: string
+  ): Promise<boolean> {
     try {
       const resetLink = `${process.env.CLIENT_URL || 'http://localhost:3000'}/reset-password?token=${token}`;
-      
+
       const mailOptions = {
         from: process.env.FROM_EMAIL || 'noreply@test-yourself.com',
         to: email,
@@ -93,7 +103,7 @@ export class EmailService {
               אם לא ביקשת לאפס את הסיסמה, אנא התעלם ממייל זה. החשבון שלך בטוח.
             </p>
           </div>
-        `
+        `,
       };
 
       await this.transporter.sendMail(mailOptions);
@@ -138,7 +148,7 @@ export class EmailService {
               תודה שבחרת ב-Test Yourself!
             </p>
           </div>
-        `
+        `,
       };
 
       await this.transporter.sendMail(mailOptions);
