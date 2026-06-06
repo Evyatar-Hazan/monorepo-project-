@@ -1,4 +1,4 @@
-import { type FormEvent, useMemo, useState } from 'react';
+import { type FormEvent, useEffect, useMemo, useState } from 'react';
 import {
   CalendarDays,
   CheckCircle2,
@@ -179,13 +179,13 @@ const galleryImages: readonly GalleryImage[] = [
   {
     title: 'מגש אירוח',
     alt: 'מגש אירוח בוטיק עם מנות קטנות ומעוצבות',
-    src: imageUrl('photo-1498579809087-ef1e558fd1da', 900),
+    src: imageUrl('photo-1555244162-803834f70033', 900),
     tall: true,
   },
   {
     title: 'שולחן שבת',
     alt: 'שולחן אוכל חגיגי ומוקפד',
-    src: imageUrl('photo-1517248135467-4c7edcad34c4', 900),
+    src: imageUrl('photo-1543353071-10c8ba85a904', 900),
   },
   {
     title: 'קינוחים אישיים',
@@ -217,10 +217,22 @@ const facts: readonly string[] = [
   'אפשר לדבר על העדפות והתאמות תפריט לפי הצורך.',
 ];
 
-const testimonials: readonly string[] = [
-  'יום שישי הפך לחלום מהרגע שהתחלנו להזמין מניס. הכל מגיע אסתטי, טעים ומפנק, והילדים כבר לא מוותרים על זה. - מיכל כ.',
-  'הרגשנו שמישהו חשב על כל פרט. המגשים היו יפים, נוחים להגשה ופשוט טעימים. - רחל ש.',
-  'הזמנו מארז לדרך וקיבלנו חוויה שלמה, לא רק אוכל. ארוז יפה, טרי ומדויק. - משפחת ל.',
+const trustCards: readonly SimpleCard[] = [
+  {
+    title: 'אסתטיקה שמגיעה מוכנה',
+    text: 'המנות נארזות ומסודרות כך שהשולחן נראה מוקפד בלי עבודה מיותרת מצדכם.',
+    icon: Sparkles,
+  },
+  {
+    title: 'התאמה לפני סגירה',
+    text: 'לפני שמתקדמים עוברים על סוג האירוח, מספר הסועדים והעדפות חשובות.',
+    icon: ClipboardList,
+  },
+  {
+    title: 'שיחה אישית, לא תפריט גנרי',
+    text: 'כל פנייה מקבלת מענה לפי התאריך, המיקום והחוויה שאתם רוצים ליצור.',
+    icon: HeartHandshake,
+  },
 ];
 
 const faqs: readonly Readonly<{ question: string; answer: string }>[] = [
@@ -264,6 +276,27 @@ function App() {
     [leadSource],
   );
 
+  useEffect(() => {
+    if (!selectedImage) {
+      return undefined;
+    }
+
+    document.body.classList.add('is-lightbox-open');
+
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') {
+        setSelectedImage(null);
+      }
+    };
+
+    window.addEventListener('keydown', handleKeyDown);
+
+    return () => {
+      document.body.classList.remove('is-lightbox-open');
+      window.removeEventListener('keydown', handleKeyDown);
+    };
+  }, [selectedImage]);
+
   const handleContactSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const formData = new FormData(event.currentTarget);
@@ -276,9 +309,7 @@ function App() {
       `מספר סועדים: ${formData.get('guests') ?? ''}`,
       `הודעה: ${formData.get('message') ?? ''}`,
     ];
-    const subject = encodeURIComponent('פנייה חדשה מאתר nis Boutique Catering');
-    const body = encodeURIComponent(lines.join('\n'));
-    window.location.href = `mailto:${email}?subject=${subject}&body=${body}`;
+    window.location.href = buildWhatsappLink(`שלום nis Boutique Catering,\n${lines.join('\n')}`);
   };
 
   return (
@@ -326,6 +357,20 @@ function App() {
               </a>
             </div>
             <p className="microcopy">שיחה קצרה, התאמה אישית, והצעת מחיר לפי האירוח שלכם.</p>
+            <dl className="hero-proof" aria-label="סוגי הזמנות מרכזיים">
+              <div>
+                <dt>שבתות</dt>
+                <dd>תפריט מוכן ומסודר</dd>
+              </div>
+              <div>
+                <dt>אירועים קטנים</dt>
+                <dd>מגשים ופינגר פוד</dd>
+              </div>
+              <div>
+                <dt>Travel nis</dt>
+                <dd>מארזים לדרך</dd>
+              </div>
+            </dl>
           </div>
         </section>
 
@@ -528,18 +573,23 @@ function App() {
           </div>
         </section>
 
-        <section className="section testimonials-section" aria-labelledby="testimonials-title">
+        <section className="section trust-section" aria-labelledby="trust-title">
           <div className="container">
             <div className="section-heading">
-              <p className="eyebrow">עדויות</p>
-              <h2 id="testimonials-title">קצר, אמין, בגובה העיניים.</h2>
+              <p className="eyebrow">למה אפשר לסמוך על nis</p>
+              <h2 id="trust-title">פחות ניחושים, יותר ודאות לפני שמזמינים.</h2>
             </div>
             <div className="testimonial-grid">
-              {testimonials.map((quote) => (
-                <figure className="testimonial-card" key={quote}>
-                  <blockquote>{quote}</blockquote>
-                </figure>
-              ))}
+              {trustCards.map((card) => {
+                const Icon = card.icon;
+                return (
+                  <article className="testimonial-card" key={card.title}>
+                    <Icon aria-hidden="true" className="card-icon" />
+                    <h3>{card.title}</h3>
+                    <p>{card.text}</p>
+                  </article>
+                );
+              })}
             </div>
           </div>
         </section>
@@ -630,7 +680,7 @@ function App() {
               </label>
               <button className="button primary full-field" type="submit">
                 <Send aria-hidden="true" />
-                שלחו הודעה
+                שלחו פנייה בוואטסאפ
               </button>
             </form>
           </div>
@@ -671,7 +721,11 @@ function App() {
           >
             <X aria-hidden="true" />
           </button>
-          <img src={selectedImage.src} alt={selectedImage.alt} />
+          <img
+            src={selectedImage.src}
+            alt={selectedImage.alt}
+            onClick={(event) => event.stopPropagation()}
+          />
         </div>
       ) : null}
     </div>

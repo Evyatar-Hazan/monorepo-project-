@@ -8,6 +8,7 @@
   --mist: #f7f4ef;
   --line: rgba(23, 19, 16, 0.13);
   --muted: #685d55;
+  --muted-strong: #51473f;
   --shadow: 0 22px 70px rgba(23, 19, 16, 0.14);
 }
 
@@ -57,9 +58,11 @@
 .brand {
   display: inline-flex;
   align-items: baseline;
+  direction: ltr;
   gap: 10px;
   font-weight: 800;
   white-space: nowrap;
+  unicode-bidi: isolate;
 }
 
 .brand-mark {
@@ -124,6 +127,11 @@
 .button:hover {
   transform: translateY(-2px);
   box-shadow: var(--shadow);
+}
+
+.topbar-cta:active,
+.button:active {
+  transform: translateY(0);
 }
 
 .hero {
@@ -212,6 +220,40 @@
   font-weight: 700;
 }
 
+.hero-proof {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 10px;
+  max-width: 680px;
+  margin: 28px 0 0;
+}
+
+.hero-proof div {
+  min-height: 82px;
+  padding: 14px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(12px);
+}
+
+.hero-proof dt,
+.hero-proof dd {
+  margin: 0;
+}
+
+.hero-proof dt {
+  color: var(--paper);
+  font-weight: 900;
+}
+
+.hero-proof dd {
+  margin-block-start: 4px;
+  color: rgba(255, 255, 255, 0.74);
+  font-size: 0.95rem;
+  line-height: 1.5;
+}
+
 .section {
   padding: clamp(72px, 9vw, 120px) 0;
 }
@@ -238,7 +280,7 @@
 .story-copy p,
 .contact-copy p {
   margin: 0;
-  color: var(--muted);
+  color: var(--muted-strong);
   font-size: 1.08rem;
   line-height: 1.9;
 }
@@ -297,9 +339,9 @@ details {
 .service-body p,
 .compact-card p,
 .process-step p,
-.testimonial-card blockquote,
+.testimonial-card p,
 details p {
-  color: var(--muted);
+  color: var(--muted-strong);
   line-height: 1.75;
 }
 
@@ -476,7 +518,12 @@ details p {
   background: var(--mist);
 }
 
-.testimonial-card blockquote {
+.testimonial-card h3 {
+  margin: 14px 0 8px;
+  font-size: 1.18rem;
+}
+
+.testimonial-card p {
   margin: 0;
   font-size: 1.05rem;
 }
@@ -599,6 +646,14 @@ details p {
   box-shadow: 0 16px 36px rgba(0, 0, 0, 0.24);
 }
 
+.floating-whatsapp:hover {
+  transform: translateY(-2px);
+}
+
+.is-lightbox-open {
+  overflow: hidden;
+}
+
 .lightbox {
   position: fixed;
   inset: 0;
@@ -641,7 +696,7 @@ details p {
   }
 
   .hero {
-    min-height: 760px;
+    min-height: 720px;
   }
 
   .hero::after {
@@ -676,6 +731,7 @@ details p {
   }
 
   .topbar {
+    grid-template-columns: minmax(0, 1fr) auto;
     padding: 10px 14px;
     gap: 12px;
   }
@@ -683,6 +739,12 @@ details p {
   .brand {
     gap: 7px;
     font-size: 0.9rem;
+    min-width: 0;
+  }
+
+  .brand span:last-child {
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
 
   .brand-mark {
@@ -690,16 +752,38 @@ details p {
   }
 
   .topbar-cta {
-    min-height: 42px;
+    min-height: 44px;
     padding: 10px 12px;
+    width: auto;
   }
 
   .hero {
-    min-height: 690px;
+    min-height: auto;
+    align-items: end;
+  }
+
+  .hero-content {
+    width: min(100% - 28px, 760px);
+    margin: 0 auto;
+    padding-block: 108px 48px;
   }
 
   .hero h1 {
-    font-size: clamp(2.8rem, 18vw, 4.4rem);
+    font-size: clamp(2.65rem, 16vw, 4rem);
+    line-height: 1;
+  }
+
+  .hero-kicker {
+    font-size: 1.45rem;
+  }
+
+  .hero-text {
+    font-size: 1.04rem;
+  }
+
+  .hero-proof {
+    grid-template-columns: 1fr;
+    margin-block-start: 22px;
   }
 
   .hero-actions,
@@ -711,7 +795,8 @@ details p {
   }
 
   .button,
-  .topbar-cta {
+  .hero-actions .button,
+  .contact-actions .button {
     width: 100%;
   }
 
@@ -727,5 +812,23 @@ details p {
   .floating-whatsapp {
     width: 52px;
     height: 52px;
+  }
+
+  .lightbox {
+    padding: 14px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
   }
 }
