@@ -1,7 +1,7 @@
 {
-  "buildCommand": "pnpm build",
-  "devCommand": "pnpm dev",
+  "buildCommand": "npx pnpm@9.15.9 build",
+  "devCommand": "npx pnpm@9.15.9 dev",
   "framework": "vite",
-  "installCommand": "npm install -g pnpm@9.15.9 && pnpm install --ignore-scripts",
+  "installCommand": "npx pnpm@9.15.9 install --ignore-scripts",
   "outputDirectory": "dist"
 }
