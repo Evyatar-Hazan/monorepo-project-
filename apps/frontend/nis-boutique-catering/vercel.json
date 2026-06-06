@@ -2,6 +2,6 @@
   "buildCommand": "pnpm build",
   "devCommand": "pnpm dev",
   "framework": "vite",
-  "installCommand": "pnpm install --ignore-scripts",
+  "installCommand": "npm install -g pnpm@9.15.9 && pnpm install --ignore-scripts",
   "outputDirectory": "dist"
 }
