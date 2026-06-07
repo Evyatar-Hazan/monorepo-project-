@@ -158,7 +158,7 @@
   position: absolute;
   inset: 0;
   z-index: -2;
-  background-image: url('https://images.unsplash.com/photo-1555244162-803834f70033?auto=format&fit=crop&w=1800&q=84');
+  background-image: url('/media/food/nis-salad-cups-branded.jpeg');
   background-position: center;
   background-size: cover;
 }
@@ -660,6 +660,34 @@ details p {
   font-weight: 800;
 }
 
+.real-media-section {
+  background: var(--mist);
+}
+
+.real-media-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 0.85fr) minmax(280px, 0.72fr);
+  gap: clamp(28px, 5vw, 72px);
+  align-items: center;
+}
+
+.real-media-grid p {
+  margin: 18px 0 0;
+  color: var(--muted-strong);
+  font-size: 1.08rem;
+  line-height: 1.9;
+}
+
+.real-media-grid video {
+  width: 100%;
+  max-height: 680px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--charcoal);
+  object-fit: cover;
+  box-shadow: var(--shadow);
+}
+
 .testimonial-card h3 {
   margin: 14px 0 8px;
   font-size: 1.18rem;
@@ -873,6 +901,7 @@ details p {
   .story-grid,
   .contact-grid,
   .faq-grid,
+  .real-media-grid,
   .service-grid,
   .menu-grid,
   .compact-grid,

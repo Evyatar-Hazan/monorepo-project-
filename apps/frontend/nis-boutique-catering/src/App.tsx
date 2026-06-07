@@ -28,6 +28,12 @@ const whatsappBase = 'https://wa.me/972503502615';
 const imageUrl = (id: string, width: number): string =>
   `https://images.unsplash.com/${id}?auto=format&fit=crop&w=${width}&q=82`;
 
+const foodMedia = {
+  saladCupsClose: '/media/food/nis-salad-cups-close.jpeg',
+  saladCupsBranded: '/media/food/nis-salad-cups-branded.jpeg',
+  saladCupsPrep: '/media/food/nis-salad-cups-prep.mp4',
+} as const;
+
 interface NavItem {
   readonly label: string;
   readonly href: string;
@@ -99,7 +105,7 @@ const services: readonly Service[] = [
     promise: 'מגשים שנפתחים יפה, נראים חגיגיים על השולחן ונוחים לאכילה בעמידה או סביב שולחן.',
     details: ['אירועים קטנים', 'בראנצ׳ים', 'מפגשים משפחתיים', 'אירוח עסקי', 'שולחנות חגיגיים'],
     cta: 'דברו איתנו על מגשי אירוח',
-    image: imageUrl('photo-1555244162-803834f70033', 900),
+    image: foodMedia.saladCupsBranded,
     icon: Utensils,
   },
   {
@@ -238,15 +244,15 @@ const coordinationCards: readonly SimpleCard[] = [
 
 const galleryImages: readonly GalleryImage[] = [
   {
-    title: 'מגש אירוח',
-    alt: 'מגש אירוח בוטיק עם מנות קטנות ומעוצבות',
-    src: imageUrl('photo-1555244162-803834f70033', 900),
+    title: 'מנות אישיות מוכנות',
+    alt: 'מנות סלט אישיות של nis באריזה שקופה עם מדבקת מותג',
+    src: foodMedia.saladCupsBranded,
     tall: true,
   },
   {
-    title: 'שולחן שבת',
-    alt: 'שולחן אוכל חגיגי ומוקפד',
-    src: imageUrl('photo-1543353071-10c8ba85a904', 900),
+    title: 'סלטים אישיים',
+    alt: 'מבחר סלטים אישיים טריים באריזות שקופות',
+    src: foodMedia.saladCupsClose,
   },
   {
     title: 'קינוחים אישיים',
@@ -254,9 +260,9 @@ const galleryImages: readonly GalleryImage[] = [
     src: imageUrl('photo-1488477181946-6428a0291777', 900),
   },
   {
-    title: 'אריזה לדרך',
-    alt: 'מארז אוכל מסודר ונוח לנסיעה',
-    src: imageUrl('photo-1526367790999-0150786686a2', 900),
+    title: 'אריזה ממותגת',
+    alt: 'אריזות אוכל אישיות עם מדבקת nis',
+    src: foodMedia.saladCupsBranded,
     tall: true,
   },
   {
@@ -633,6 +639,29 @@ function App() {
                 );
               })}
             </div>
+          </div>
+        </section>
+
+        <section className="section real-media-section" aria-labelledby="real-media-title">
+          <div className="container real-media-grid">
+            <div>
+              <p className="eyebrow">רגע אמיתי מהמטבח</p>
+              <h2 id="real-media-title">ככה נראית תשומת לב לפני שהאירוח מגיע לשולחן.</h2>
+              <p>
+                מנות אישיות, אריזה נקייה, מדבקת nis ופרטים קטנים שמסדרים את
+                החוויה עוד לפני הביס הראשון. התמונות והווידאו כאן הם מהכנות
+                אמיתיות של nis.
+              </p>
+            </div>
+            <video
+              controls
+              muted
+              playsInline
+              preload="metadata"
+              poster={foodMedia.saladCupsBranded}
+            >
+              <source src={foodMedia.saladCupsPrep} type="video/mp4" />
+            </video>
           </div>
         </section>
 
