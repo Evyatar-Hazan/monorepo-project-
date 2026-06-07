@@ -320,8 +320,11 @@ function App() {
 
       <header className="topbar" aria-label="ניווט ראשי">
         <a className="brand" href="#top" aria-label="nis Boutique Catering">
-          <span className="brand-mark">nis</span>
-          <span>Boutique Catering</span>
+          <img
+            className="brand-logo"
+            src="/brand/nis-logo.svg"
+            alt="nis Boutique Catering"
+          />
         </a>
         <nav className="nav-links">
           {navItems.map((item) => (

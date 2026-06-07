@@ -57,19 +57,19 @@
 
 .brand {
   display: inline-flex;
-  align-items: baseline;
-  direction: ltr;
-  gap: 10px;
-  font-weight: 800;
-  white-space: nowrap;
-  unicode-bidi: isolate;
+  align-items: center;
+  width: clamp(224px, 21vw, 310px);
+  min-height: 56px;
 }
 
-.brand-mark {
-  color: var(--gold-dark);
-  font-family: 'Playfair Display', Georgia, serif;
-  font-size: 2rem;
-  letter-spacing: 0;
+.brand-logo {
+  display: block;
+  width: 100%;
+  height: auto;
+  max-height: 64px;
+  object-fit: contain;
+  object-position: center;
+  border-radius: 0;
 }
 
 .nav-links {
@@ -737,18 +737,8 @@ details p {
   }
 
   .brand {
-    gap: 7px;
-    font-size: 0.9rem;
+    width: clamp(178px, 50vw, 230px);
     min-width: 0;
-  }
-
-  .brand span:last-child {
-    overflow: hidden;
-    text-overflow: ellipsis;
-  }
-
-  .brand-mark {
-    font-size: 1.65rem;
   }
 
   .topbar-cta {
