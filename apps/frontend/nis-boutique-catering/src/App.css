@@ -431,6 +431,32 @@ details p {
   margin-block-start: 18px;
 }
 
+.story-moments {
+  display: grid;
+  gap: 12px;
+  margin-block-start: 28px;
+}
+
+.story-moments article {
+  padding: 16px 18px;
+  border: 1px solid rgba(198, 154, 67, 0.32);
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.06);
+}
+
+.story-moments h3 {
+  margin: 0;
+  color: var(--gold);
+  font-size: 1rem;
+}
+
+.story-moments p {
+  margin-block-start: 8px;
+  color: rgba(255, 255, 255, 0.82);
+  font-size: 0.98rem;
+  line-height: 1.75;
+}
+
 .story-grid img {
   width: 100%;
   min-height: 520px;
