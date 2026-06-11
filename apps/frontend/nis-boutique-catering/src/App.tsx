@@ -1,8 +1,11 @@
-import { type FormEvent, useEffect, useState } from 'react';
+import { type CSSProperties, type FormEvent, useEffect, useState } from 'react';
 import {
+  ArrowLeft,
   CalendarDays,
+  Camera,
   CheckCircle2,
   ChefHat,
+  Clock,
   ClipboardList,
   Gift,
   HeartHandshake,
@@ -11,8 +14,10 @@ import {
   MessageCircle,
   Package,
   Phone,
+  Play,
   Send,
   Sparkles,
+  Star,
   Utensils,
   Users,
   X,
@@ -337,6 +342,30 @@ const galleryImages: readonly GalleryImage[] = [
   },
 ];
 
+const heroStats: readonly Readonly<{ value: string; label: string }>[] = [
+  { value: '3', label: 'חוויות אירוח' },
+  { value: '14', label: 'רגעים אמיתיים בגלריה' },
+  { value: '1', label: 'שיחה אישית לפני הזמנה' },
+];
+
+const signatureMoments: readonly Readonly<{ title: string; text: string; image: string }>[]= [
+  {
+    title: 'שולחן שנפתח יפה',
+    text: 'מגשים, צבעים וכלי הגשה שמרגישים מוכנים לאורחים כבר מהרגע הראשון.',
+    image: foodMedia.hostingTableOverview,
+  },
+  {
+    title: 'ביסים קטנים, רושם גדול',
+    text: 'פינגר פוד וכריכונים שנוחים להגשה, לצילום ולאכילה.',
+    image: foodMedia.miniSandwiches,
+  },
+  {
+    title: 'פרטים שמרגישים בוטיק',
+    text: 'קפה, עריכה, אריזה ותיאום קטן שמסדרים את כל החוויה.',
+    image: foodMedia.coffeeServiceClose,
+  },
+];
+
 const facts: readonly string[] = [
   'אזור פעילות זמני: ביתר עילית והסביבה, בתיאום מול הלקוח.',
   'להזמנות שבת ואירועים מומלץ לפנות מוקדם ככל האפשר.',
@@ -412,6 +441,31 @@ function App() {
   const floatingWhatsapp = buildWhatsappLink('שלום nis, אשמח לקבל פרטים דרך האתר.');
 
   useEffect(() => {
+    const revealElements = Array.from(document.querySelectorAll<HTMLElement>('.reveal'));
+
+    if (!('IntersectionObserver' in window)) {
+      revealElements.forEach((element) => element.classList.add('is-visible'));
+      return undefined;
+    }
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('is-visible');
+            observer.unobserve(entry.target);
+          }
+        });
+      },
+      { rootMargin: '0px 0px -12% 0px', threshold: 0.12 },
+    );
+
+    revealElements.forEach((element) => observer.observe(element));
+
+    return () => observer.disconnect();
+  }, []);
+
+  useEffect(() => {
     if (!selectedImage) {
       return undefined;
     }
@@ -478,44 +532,60 @@ function App() {
       <main id="main">
         <section id="top" className="hero" aria-labelledby="hero-title">
           <div className="hero-media" aria-hidden="true" />
-          <div className="hero-content">
-            <p className="eyebrow">מהרובע היהודי לביתר עילית</p>
-            <h1 id="hero-title">nis</h1>
-            <p className="hero-brand-subtitle">Boutique Catering</p>
-            <p className="hero-kicker">אירוח עם טעם של בית וגימור של בוטיק.</p>
-            <p className="hero-text">
-              מאחורי nis עומדת יהודית ניסטנפובר, שמביאה לשולחן זיכרון של בתים
-              פתוחים, ריח של שבת ואירוח שמרגיש אישי. היום זה הופך לקייטרינג
-              בוטיק מביתר עילית: שבתות, מגשי אירוח ומארזי דרך שנבנים סביבכם.
-            </p>
-            <div className="hero-actions" aria-label="פעולות ראשיות">
-              <a className="button primary" href={heroWhatsapp} data-event="hero_whatsapp">
-                <MessageCircle aria-hidden="true" />
-                דברו איתנו בוואטסאפ
-              </a>
-              <a className="button secondary" href="#experiences">
-                גלו את החוויות שלנו
+          <div className="hero-layout">
+            <div className="hero-content reveal is-visible">
+              <p className="eyebrow">מהרובע היהודי לביתר עילית</p>
+              <h1 id="hero-title">nis</h1>
+              <p className="hero-brand-subtitle">Boutique Catering</p>
+              <p className="hero-kicker">אירוח שנראה כמו בוטיק, ומרגיש כמו בית.</p>
+              <p className="hero-text">
+                מאחורי nis עומדת יהודית ניסטנפובר, שמביאה לשולחן זיכרון של בתים
+                פתוחים, ריח של שבת ואירוח שמרגיש אישי. היום זה הופך לקייטרינג
+                בוטיק מביתר עילית: שבתות, מגשי אירוח ומארזי דרך שנבנים סביבכם.
+              </p>
+              <div className="hero-actions" aria-label="פעולות ראשיות">
+                <a className="button primary" href={heroWhatsapp} data-event="hero_whatsapp">
+                  <MessageCircle aria-hidden="true" />
+                  דברו איתנו בוואטסאפ
+                </a>
+                <a className="button secondary" href="#gallery">
+                  <Camera aria-hidden="true" />
+                  לראות את השולחן
+                </a>
+              </div>
+              <p className="microcopy">שיחה קצרה, התאמה אישית, והצעת מחיר לפי האירוח שלכם.</p>
+              <div className="hero-badges" aria-label="נקודות אמון">
+                <span>
+                  <Star aria-hidden="true" size={16} />
+                  אירוח מותאם אישית
+                </span>
+                <span>
+                  <Clock aria-hidden="true" size={16} />
+                  מומלץ לפנות מוקדם
+                </span>
+              </div>
+              <dl className="hero-proof" aria-label="סוגי הזמנות מרכזיים">
+                {heroStats.map((stat) => (
+                  <div key={stat.label}>
+                    <dt>{stat.value}</dt>
+                    <dd>{stat.label}</dd>
+                  </div>
+                ))}
+              </dl>
+            </div>
+            <div className="hero-showcase reveal is-visible" aria-label="תמונות אירוח של nis">
+              <img className="hero-plate primary-plate" src={foodMedia.salmonSkewersLemon} alt="שיפודי סלמון עם לימון" />
+              <img className="hero-plate side-plate" src={foodMedia.dipsTrayClose} alt="מגש מטבלים צבעוני" />
+              <img className="hero-plate tall-plate" src={foodMedia.tableSettingBlueGold} alt="שולחן ערוך לאירוח" />
+              <a className="video-chip" href="#gallery">
+                <Play aria-hidden="true" size={18} />
+                רגעים אמיתיים מהאירוח
               </a>
             </div>
-            <p className="microcopy">שיחה קצרה, התאמה אישית, והצעת מחיר לפי האירוח שלכם.</p>
-            <dl className="hero-proof" aria-label="סוגי הזמנות מרכזיים">
-              <div>
-                <dt>שבתות</dt>
-                <dd>תפריט מוכן, חם ומסודר להגשה</dd>
-              </div>
-              <div>
-                <dt>ניס בכיס</dt>
-                <dd>מגשים ופינגר פוד לאירוח קטן</dd>
-              </div>
-              <div>
-                <dt>Travel nis</dt>
-                <dd>מארזים לדרך, פיקניק וימי כיף</dd>
-              </div>
-            </dl>
           </div>
         </section>
 
-        <section className="section intro-band" aria-label="בידול">
+        <section className="section intro-band reveal" aria-label="בידול">
           <div className="container intro-grid">
             <div>
               <p className="eyebrow">הבטחת המותג</p>
@@ -529,9 +599,34 @@ function App() {
           </div>
         </section>
 
+        <section className="section signature-section" aria-labelledby="signature-title">
+          <div className="container">
+            <div className="section-heading reveal">
+              <p className="eyebrow">החוויה לפני התפריט</p>
+              <h2 id="signature-title">לא רק מה מגישים, אלא איך השולחן מרגיש כשהוא נפתח.</h2>
+            </div>
+            <div className="signature-grid">
+              {signatureMoments.map((moment, index) => (
+                <article
+                  className="signature-card reveal"
+                  key={moment.title}
+                  style={{ '--delay': `${index * 80}ms` } as CSSProperties}
+                >
+                  <img src={moment.image} alt="" loading="lazy" />
+                  <div>
+                    <span>0{index + 1}</span>
+                    <h3>{moment.title}</h3>
+                    <p>{moment.text}</p>
+                  </div>
+                </article>
+              ))}
+            </div>
+          </div>
+        </section>
+
         <section id="experiences" className="section" aria-labelledby="experiences-title">
           <div className="container">
-            <div className="section-heading">
+            <div className="section-heading reveal">
               <p className="eyebrow">שלוש החוויות של nis</p>
               <h2 id="experiences-title">כל אירוח מקבל את הקצב, הטעם והאריזה שלו.</h2>
             </div>
@@ -539,7 +634,7 @@ function App() {
               {services.map((service) => {
                 const Icon = service.icon;
                 return (
-                  <article className="service-card" key={service.title}>
+                  <article className="service-card reveal" key={service.title}>
                     <img src={service.image} alt="" loading="lazy" />
                     <div className="service-body">
                       <Icon aria-hidden="true" className="card-icon" />
@@ -564,6 +659,7 @@ function App() {
                         className="text-link"
                       >
                         {service.cta}
+                        <ArrowLeft aria-hidden="true" size={16} />
                       </a>
                     </div>
                   </article>
@@ -575,7 +671,7 @@ function App() {
 
         <section className="section soft-section" aria-labelledby="fit-title">
           <div className="container">
-            <div className="section-heading">
+            <div className="section-heading reveal">
               <p className="eyebrow">למי זה מתאים?</p>
               <h2 id="fit-title">למי nis מתאימה במיוחד?</h2>
             </div>
@@ -583,7 +679,7 @@ function App() {
               {fitCards.map((card) => {
                 const Icon = card.icon;
                 return (
-                  <article className="compact-card" key={card.title}>
+                  <article className="compact-card reveal" key={card.title}>
                     <Icon aria-hidden="true" className="card-icon" />
                     <h3>{card.title}</h3>
                     <p>{card.text}</p>
@@ -596,7 +692,7 @@ function App() {
 
         <section id="process" className="section" aria-labelledby="process-title">
           <div className="container">
-            <div className="section-heading">
+            <div className="section-heading reveal">
               <p className="eyebrow">איך זה עובד</p>
               <h2 id="process-title">ארבעה צעדים פשוטים לאירוח רגוע.</h2>
             </div>
@@ -604,7 +700,7 @@ function App() {
               {processSteps.map((step, index) => {
                 const Icon = step.icon;
                 return (
-                  <article className="process-step" key={step.title}>
+                  <article className="process-step reveal" key={step.title}>
                     <span className="step-number">{index + 1}</span>
                     <Icon aria-hidden="true" className="card-icon" />
                     <h3>{step.title}</h3>
@@ -618,7 +714,7 @@ function App() {
 
         <section className="section story-section" aria-labelledby="story-title">
           <div className="container story-grid">
-            <div className="story-copy">
+            <div className="story-copy reveal">
               <p className="eyebrow">הסיפור מאחורי nis</p>
               <h2 id="story-title">אוכל שיש בו נשמה, סדר, יופי וחום של בית.</h2>
               <p>
@@ -644,6 +740,7 @@ function App() {
               </div>
             </div>
             <img
+              className="reveal"
               src={foodMedia.tableSettingBlueGold}
               alt="שולחן אירוח ערוך ומוכן לאורחים"
               loading="lazy"
@@ -653,7 +750,7 @@ function App() {
 
         <section id="samples" className="section soft-section" aria-labelledby="samples-title">
           <div className="container">
-            <div className="section-heading sample-heading">
+            <div className="section-heading sample-heading reveal">
               <p className="eyebrow">תפריטים ומארזים לדוגמה</p>
               <h2 id="samples-title">רעיונות מוחשיים שמותאמים לכל אירוח.</h2>
               <p>
@@ -664,7 +761,7 @@ function App() {
             </div>
             <div className="menu-grid">
               {menuGroups.map((group) => (
-                <article className="menu-card" key={group.title}>
+                <article className="menu-card reveal" key={group.title}>
                   <h3>{group.title}</h3>
                   <p>{group.intro}</p>
                   <ul>
@@ -683,7 +780,7 @@ function App() {
 
         <section className="section coordination-section" aria-labelledby="coordination-title">
           <div className="container">
-            <div className="section-heading">
+            <div className="section-heading reveal">
               <p className="eyebrow">תיאום וזמינות</p>
               <h2 id="coordination-title">פרטים זמניים שמאפשרים להתקדם כבר עכשיו.</h2>
             </div>
@@ -691,7 +788,7 @@ function App() {
               {coordinationCards.map((card) => {
                 const Icon = card.icon;
                 return (
-                  <article className="compact-card" key={card.title}>
+                  <article className="compact-card reveal" key={card.title}>
                     <Icon aria-hidden="true" className="card-icon" />
                     <h3>{card.title}</h3>
                     <p>{card.text}</p>
@@ -704,7 +801,7 @@ function App() {
 
         <section className="section real-media-section" aria-labelledby="real-media-title">
           <div className="container real-media-grid">
-            <div>
+            <div className="reveal">
               <p className="eyebrow">רגע אמיתי מהמטבח</p>
               <h2 id="real-media-title">ככה נראית תשומת לב לפני שהאירוח מגיע לשולחן.</h2>
               <p>
@@ -714,6 +811,7 @@ function App() {
               </p>
             </div>
             <video
+              className="reveal"
               controls
               muted
               playsInline
@@ -727,15 +825,20 @@ function App() {
 
         <section id="gallery" className="section" aria-labelledby="gallery-title">
           <div className="container">
-            <div className="section-heading">
+            <div className="section-heading gallery-heading reveal">
               <p className="eyebrow">גלריה</p>
               <h2 id="gallery-title">קודם רואים, אחר כך מרגישים בטוחים לפנות.</h2>
+              <p>
+                גלריה אמיתית מהאירוח: שולחנות, מגשים, סלטים, קפה ופרטים קטנים
+                שמראים איך nis נראית כשהיא מגיעה לשולחן.
+              </p>
             </div>
             <div className="gallery-grid">
-              {galleryImages.map((image) => (
+              {galleryImages.map((image, index) => (
                 <button
-                  className={image.tall ? 'gallery-item tall' : 'gallery-item'}
+                  className={image.tall ? 'gallery-item tall reveal' : 'gallery-item reveal'}
                   key={image.title}
+                  style={{ '--delay': `${(index % 6) * 55}ms` } as CSSProperties}
                   type="button"
                   onClick={() => setSelectedImage(image)}
                   aria-label={`פתח תמונה: ${image.title}`}
@@ -750,11 +853,11 @@ function App() {
 
         <section className="section details-section" aria-labelledby="details-title">
           <div className="container split-section">
-            <div>
+            <div className="reveal">
               <p className="eyebrow">פרטים שחשוב לדעת</p>
               <h2 id="details-title">שומרים על ציפיות ברורות כבר מהשיחה הראשונה.</h2>
             </div>
-            <ul className="fact-list">
+            <ul className="fact-list reveal">
               {facts.map((fact) => (
                 <li key={fact}>
                   <CheckCircle2 aria-hidden="true" />
@@ -767,11 +870,11 @@ function App() {
 
         <section className="section seo-section" aria-labelledby="seo-title">
           <div className="container split-section">
-            <div>
+            <div className="reveal">
               <p className="eyebrow">מה אפשר להזמין</p>
               <h2 id="seo-title">קייטרינג בוטיק מביתר עילית לשבת, אירוח קטן ומארזים לדרך.</h2>
             </div>
-            <div>
+            <div className="reveal">
               <p>
                 nis נותנת מענה למי שמחפש קייטרינג בוטיק בביתר עילית והסביבה:
                 תפריט שבת מוכן, מגשי אירוח לאירועים קטנים, פינגר פוד, בראנץ׳
@@ -789,7 +892,7 @@ function App() {
 
         <section className="section trust-section" aria-labelledby="trust-title">
           <div className="container">
-            <div className="section-heading">
+            <div className="section-heading reveal">
               <p className="eyebrow">למה אפשר לסמוך על nis</p>
               <h2 id="trust-title">פחות ניחושים, יותר ודאות לפני שמזמינים.</h2>
             </div>
@@ -797,7 +900,7 @@ function App() {
               {trustCards.map((card) => {
                 const Icon = card.icon;
                 return (
-                  <article className="testimonial-card" key={card.title}>
+                  <article className="testimonial-card reveal" key={card.title}>
                     <Icon aria-hidden="true" className="card-icon" />
                     <h3>{card.title}</h3>
                     <p>{card.text}</p>
@@ -810,11 +913,11 @@ function App() {
 
         <section id="faq" className="section soft-section" aria-labelledby="faq-title">
           <div className="container faq-grid">
-            <div>
+            <div className="reveal">
               <p className="eyebrow">שאלות נפוצות</p>
               <h2 id="faq-title">התשובות שמקלות על הפנייה הראשונה.</h2>
             </div>
-            <div className="faq-list">
+            <div className="faq-list reveal">
               {faqs.map((faq) => (
                 <details key={faq.question}>
                   <summary>{faq.question}</summary>
@@ -827,7 +930,7 @@ function App() {
 
         <section id="contact" className="section contact-section" aria-labelledby="contact-title">
           <div className="container contact-grid">
-            <div className="contact-copy">
+            <div className="contact-copy reveal">
               <p className="eyebrow">יצירת קשר</p>
               <h2 id="contact-title">נשמח לקחת חלק בשמחה שלכם.</h2>
               <p>
@@ -853,7 +956,7 @@ function App() {
                 </span>
               </div>
             </div>
-            <form className="contact-form" onSubmit={handleContactSubmit}>
+            <form className="contact-form reveal" onSubmit={handleContactSubmit}>
               <label>
                 שם מלא
                 <input name="name" autoComplete="name" required />
@@ -949,6 +1052,7 @@ function App() {
             alt={selectedImage.alt}
             onClick={(event) => event.stopPropagation()}
           />
+          <p className="lightbox-caption">{selectedImage.title}</p>
         </div>
       ) : null}
     </div>
