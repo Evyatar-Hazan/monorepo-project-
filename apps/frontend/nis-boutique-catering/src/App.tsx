@@ -25,13 +25,25 @@ const phoneHref = 'tel:+972503502615';
 const email = 'nisboutiquecatering@gmail.com';
 const whatsappBase = 'https://wa.me/972503502615';
 
-const imageUrl = (id: string, width: number): string =>
-  `https://images.unsplash.com/${id}?auto=format&fit=crop&w=${width}&q=82`;
-
 const foodMedia = {
   saladCupsClose: '/media/food/nis-salad-cups-close.jpeg',
   saladCupsBranded: '/media/food/nis-salad-cups-branded.jpeg',
   saladCupsPrep: '/media/food/nis-salad-cups-prep.mp4',
+  eventVideo: '/media/food/events/nis-event-table-video.mp4',
+  mezzeTrayClose: '/media/food/events/mezze-tray-close.webp',
+  hostingTableOverview: '/media/food/events/hosting-table-overview.webp',
+  tableSettingBlueGold: '/media/food/events/table-setting-blue-gold.webp',
+  coffeeStation: '/media/food/events/coffee-station.webp',
+  dipsTrayClose: '/media/food/events/dips-tray-close.webp',
+  salmonSkewersLemon: '/media/food/events/salmon-skewers-lemon.webp',
+  vegetableFocaccia: '/media/food/events/vegetable-focaccia.webp',
+  miniSandwiches: '/media/food/events/mini-sandwiches.webp',
+  roastedVegetables: '/media/food/events/roasted-vegetables.webp',
+  salmonSkewersClose: '/media/food/events/salmon-skewers-close.webp',
+  purpleCabbageSalad: '/media/food/events/purple-cabbage-salad.webp',
+  coffeeServiceClose: '/media/food/events/coffee-service-close.webp',
+  capreseSaladBowl: '/media/food/events/caprese-salad-bowl.webp',
+  roastedZucchiniSalad: '/media/food/events/roasted-zucchini-salad.webp',
 } as const;
 
 interface NavItem {
@@ -93,7 +105,7 @@ const services: readonly Service[] = [
     promise: 'מגיע מוכן, מסודר וברור להגשה, עם התאמה לכמות הסועדים ולאופי השבת.',
     details: ['סלטים', 'דגים', 'עיקריות', 'תוספות', 'חלות', 'קינוחים', 'מנות בהתאמה אישית'],
     cta: 'להזמנת תפריט שבת',
-    image: imageUrl('photo-1543353071-10c8ba85a904', 900),
+    image: foodMedia.salmonSkewersLemon,
     icon: ChefHat,
   },
   {
@@ -105,7 +117,7 @@ const services: readonly Service[] = [
     promise: 'מגשים שנפתחים יפה, נראים חגיגיים על השולחן ונוחים לאכילה בעמידה או סביב שולחן.',
     details: ['אירועים קטנים', 'בראנצ׳ים', 'מפגשים משפחתיים', 'אירוח עסקי', 'שולחנות חגיגיים'],
     cta: 'דברו איתנו על מגשי אירוח',
-    image: foodMedia.saladCupsBranded,
+    image: foodMedia.hostingTableOverview,
     icon: Utensils,
   },
   {
@@ -117,7 +129,7 @@ const services: readonly Service[] = [
     promise: 'אוכל ארוז חכם, יפה ונוח לנשיאה, כדי שהדרך עצמה תרגיש כמו חלק מהחוויה.',
     details: ['פיקניק זוגי', 'טיול משפחתי', 'יום הולדת בטבע', 'נסיעות ארוכות', 'ימי חופש'],
     cta: 'להזמנת מארז דרך',
-    image: imageUrl('photo-1485963631004-f2f00b1d6606', 900),
+    image: foodMedia.miniSandwiches,
     icon: Package,
   },
 ];
@@ -244,36 +256,84 @@ const coordinationCards: readonly SimpleCard[] = [
 
 const galleryImages: readonly GalleryImage[] = [
   {
-    title: 'מנות אישיות מוכנות',
-    alt: 'מנות סלט אישיות של nis באריזה שקופה עם מדבקת מותג',
-    src: foodMedia.saladCupsBranded,
+    title: 'שולחן אירוח מוכן',
+    alt: 'שולחן אירוח מסודר עם מגשי ירקות, סלטים, כריכונים וכלי הגשה',
+    src: foodMedia.hostingTableOverview,
     tall: true,
   },
   {
-    title: 'סלטים אישיים',
-    alt: 'מבחר סלטים אישיים טריים באריזות שקופות',
-    src: foodMedia.saladCupsClose,
-  },
-  {
-    title: 'קינוחים אישיים',
-    alt: 'קינוחים אישיים מסודרים להגשה',
-    src: imageUrl('photo-1488477181946-6428a0291777', 900),
-  },
-  {
-    title: 'אריזה ממותגת',
-    alt: 'אריזות אוכל אישיות עם מדבקת nis',
-    src: foodMedia.saladCupsBranded,
+    title: 'שיפודי סלמון בלימון',
+    alt: 'מגש שיפודי סלמון עם פרוסות לימון על מצע ירוק',
+    src: foodMedia.salmonSkewersLemon,
     tall: true,
   },
   {
-    title: 'תקריב מנות',
-    alt: 'תקריב של מנות אוכל טריות ומוקפדות',
-    src: imageUrl('photo-1476224203421-9ac39bcb3327', 900),
+    title: 'פוקצ׳ה ירקות צבעונית',
+    alt: 'פוקצ׳ה חתוכה עם ירקות קלויים וגבינה',
+    src: foodMedia.vegetableFocaccia,
   },
   {
-    title: 'שולחן אירוח',
-    alt: 'שולחן אירוח עם מגוון מנות להגשה',
-    src: imageUrl('photo-1551218808-94e220e084d2', 900),
+    title: 'כריכונים אישיים',
+    alt: 'מגש כריכונים עגולים עם חסה וסיכות במבוק',
+    src: foodMedia.miniSandwiches,
+  },
+  {
+    title: 'סלט קפרזה אישי',
+    alt: 'קערת סלט עם עגבניות שרי, מוצרלה, רוטב ירוק ושקית בוטנים',
+    src: foodMedia.capreseSaladBowl,
+    tall: true,
+  },
+  {
+    title: 'ירקות קלויים צבעוניים',
+    alt: 'מגש ירקות קלויים עם פלפלים, ברוקולי, פטריות, בצל וחצילים',
+    src: foodMedia.roastedVegetables,
+    tall: true,
+  },
+  {
+    title: 'מטבלים למרכז השולחן',
+    alt: 'מגש מטבלים עם זיתים, סלט טונה, מטבל לבן ומטבל כתום',
+    src: foodMedia.dipsTrayClose,
+  },
+  {
+    title: 'מגש גבינות ומטבלים',
+    alt: 'מגש מחולק עם זיתים, קוביות גבינה, מטבל עגבניות וחמאה',
+    src: foodMedia.mezzeTrayClose,
+    tall: true,
+  },
+  {
+    title: 'סלט כרוב סגול',
+    alt: 'קערת סלט כרוב סגול עם בצל ירוק, רוטב ושקית אגוזים',
+    src: foodMedia.purpleCabbageSalad,
+    tall: true,
+  },
+  {
+    title: 'סלט זוקיני ופטריות',
+    alt: 'קערת סלט עם זוקיני קלוי, פטריות, גבינה ורוטב',
+    src: foodMedia.roastedZucchiniSalad,
+    tall: true,
+  },
+  {
+    title: 'שיפודי סלמון מקרוב',
+    alt: 'תקריב של שיפודי סלמון עם עשבי תיבול ולימון',
+    src: foodMedia.salmonSkewersClose,
+    tall: true,
+  },
+  {
+    title: 'עמדת קפה ותה',
+    alt: 'עמדת קפה עם מיחם, חלב, כוסות, סכו"ם וסוכר',
+    src: foodMedia.coffeeStation,
+  },
+  {
+    title: 'ערכת קפה מוקפדת',
+    alt: 'קופסת תיונים, סוכר וסכו"ם לצד מיחם לשירות קפה',
+    src: foodMedia.coffeeServiceClose,
+    tall: true,
+  },
+  {
+    title: 'שולחן ערוך באירוע',
+    alt: 'שולחן ערוך עם מפה זהובה, צלחות כחולות ומפיות תכלת',
+    src: foodMedia.tableSettingBlueGold,
+    tall: true,
   },
 ];
 
@@ -584,8 +644,8 @@ function App() {
               </div>
             </div>
             <img
-              src={imageUrl('photo-1556911220-bff31c812dba', 1000)}
-              alt="הכנת אוכל מוקפד במטבח"
+              src={foodMedia.tableSettingBlueGold}
+              alt="שולחן אירוח ערוך ומוכן לאורחים"
               loading="lazy"
             />
           </div>
@@ -658,9 +718,9 @@ function App() {
               muted
               playsInline
               preload="metadata"
-              poster={foodMedia.saladCupsBranded}
+              poster={foodMedia.hostingTableOverview}
             >
-              <source src={foodMedia.saladCupsPrep} type="video/mp4" />
+              <source src={foodMedia.eventVideo} type="video/mp4" />
             </video>
           </div>
         </section>
