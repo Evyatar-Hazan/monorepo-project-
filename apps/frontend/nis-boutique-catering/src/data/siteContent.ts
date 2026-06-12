@@ -25,6 +25,7 @@ export const phoneDisplay = '050-3502615';
 export const phoneHref = 'tel:+972503502615';
 export const email = 'nisboutiquecatering@gmail.com';
 export const whatsappBase = 'https://wa.me/972503502615';
+export const siteVersion = 'v0.1.0';
 
 export const sectionIds = ['top', 'experiences', 'process', 'gallery', 'faq', 'contact'] as const;
 

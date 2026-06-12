@@ -34,9 +34,11 @@ export const Topbar = ({ activeNavSection, isScrolled, topbarWhatsapp }: TopbarP
 export const Footer = ({
   email,
   footerWhatsapp,
+  version,
 }: {
   readonly email: string;
   readonly footerWhatsapp: string;
+  readonly version: string;
 }) => (
   <footer className="site-footer">
     <div className="container footer-grid">
@@ -44,6 +46,7 @@ export const Footer = ({
         <strong>nis</strong>
         <span>Boutique Catering</span>
         <p>אוכל של בית, גימור של בוטיק.</p>
+        <small className="footer-version">Version {version}</small>
       </div>
       <div className="footer-links">
         <a href={phoneHref}>{phoneDisplay}</a>

@@ -1,7 +1,7 @@
 import { type CSSProperties, type FormEvent, useCallback, useMemo, useState } from 'react';
 import { ContactSection, CoordinationSection, DetailsSection, EditorialSection, ExperienceLabSection, FaqSection, GallerySection, HeroSection, IntroBandSection, ManifestoSection, ProcessSection, RealMediaSection, SamplesSection, SeoSection, ServicesSection, SignatureSection, StorySection, TrustSection, BoutiqueSection } from './components/MainSections';
 import { FloatingActions, Footer, LightboxDialog, Topbar } from './components/SiteChrome';
-import { email, galleryImages, sectionIds, services, type GalleryCategory } from './data/siteContent';
+import { email, galleryImages, sectionIds, services, siteVersion, type GalleryCategory } from './data/siteContent';
 import { useAutoRotate } from './hooks/useAutoRotate';
 import { useLightboxDialog } from './hooks/useLightboxDialog';
 import { usePointerGlow } from './hooks/usePointerGlow';
@@ -135,7 +135,7 @@ function App() {
         />
       </main>
 
-      <Footer email={email} footerWhatsapp={footerWhatsapp} />
+      <Footer email={email} footerWhatsapp={footerWhatsapp} version={siteVersion} />
       <FloatingActions floatingWhatsapp={floatingWhatsapp} />
       <LightboxDialog
         dialogRef={lightboxRef}
