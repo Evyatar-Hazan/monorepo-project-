@@ -1,6 +1,7 @@
 import { type CSSProperties, type FormEventHandler, type KeyboardEvent as ReactKeyboardEvent, type ReactNode } from 'react';
 import { ArrowLeft, Camera, CheckCircle2, ChefHat, Clock, Mail, MapPin, MessageCircle, Package, Phone, Play, Send, Utensils } from 'lucide-react';
 import {
+  audienceCards,
   boutiqueReasons,
   coordinationCards,
   editorialCards,
@@ -69,11 +70,12 @@ export const HeroSection = ({ heroWhatsapp }: { readonly heroWhatsapp: string })
           <br />
           לשבתות ואירועים קטנים
         </h1>
-        <p className="hero-kicker">אוכל ביתי מוקפד, בהגשה של בוטיק, לאירוח קטן שמרגיש גדול.</p>
+        <p className="hero-kicker">
+          קייטרינג בוטיק ביתי לשבתות, אירועים קטנים ומארזים, עם אוכל מוקפד, הגשה אסתטית ושירות אישי.
+        </p>
         <p className="hero-text">
-          nis מחברת בין אוכל ביתי מוקפד לבין שפה של בוטיק: שבתות עשירות, אירוח קטן שמרגיש
-          מכובד, ומארזים יפים לדרך. הכול נבנה סביב סוג האירוח שלכם, עם התאמה אישית ותחושה
-          שהכול כבר מסודר.
+          nis מחברת בין טעם של בית לבין הגשה של בוטיק: שבתות עשירות, אירועים קטנים ומארזים
+          יפים לדרך. הכול נבנה סביב סוג האירוח שלכם, מהשיחה הראשונה ועד הרגע שהשולחן מוכן.
         </p>
         <div className="hero-actions" aria-label="פעולות ראשיות">
           <a className="button primary" href={heroWhatsapp} data-event="hero_whatsapp">
@@ -255,6 +257,31 @@ export const EditorialSection = () => (
   </section>
 );
 
+export const AudienceSection = () => (
+  <section className="section" aria-labelledby="audience-title">
+    <div className="container">
+      <SectionHeading eyebrow="למי זה מתאים" title="כשרוצים לארח יפה, טעים ומכובד בלי לסחוב הכול לבד." id="audience-title">
+        <p>
+          nis מתאימה למי שרוצה לזהות את עצמו מהר: שבת רגועה יותר, אירוע קטן שנראה נכון, או
+          מארז יפה שלוקחים לדרך או שולחים הלאה.
+        </p>
+      </SectionHeading>
+      <div className="compact-grid">
+        {audienceCards.map((card) => {
+          const Icon = card.icon;
+          return (
+            <article className="compact-card reveal" key={card.title}>
+              <Icon aria-hidden="true" className="card-icon" />
+              <h3>{card.title}</h3>
+              <p>{card.text}</p>
+            </article>
+          );
+        })}
+      </div>
+    </div>
+  </section>
+);
+
 interface ExperienceLabSectionProps {
   readonly activeExperienceIndex: number;
   readonly onChangeExperience: (index: number) => void;
@@ -391,8 +418,8 @@ export const BoutiqueSection = () => (
   <section className="section boutique-section" aria-labelledby="boutique-title">
     <div className="container boutique-layout">
       <div className="boutique-copy reveal">
-        <p className="eyebrow">למה לבחור בנו</p>
-        <h2 id="boutique-title">אירוח טוב לא צריך להרגיש תעשייתי. הוא צריך להרגיש אישי, חם ומכובד.</h2>
+        <p className="eyebrow">מה הופך אותנו לבוטיק</p>
+        <h2 id="boutique-title">בוטיק אצל nis הוא לא רק מילה יפה. הוא הוכחה בטעם, בנראות וביחס.</h2>
         <p>
           מאחורי nis עומדת מחשבה על כל רגע שהאורחים פוגשים: מהמראה של השולחן, דרך האריזה, ועד
           תחושת השקט של מי שמארח. בדיוק שם המילה Boutique מקבלת הוכחה אמיתית.
@@ -742,7 +769,7 @@ export const ContactSection = ({
         <div className="contact-actions">
           <a className="button primary" href={contactWhatsapp} data-event="contact_whatsapp">
             <MessageCircle aria-hidden="true" />
-            דברו איתנו בוואטסאפ
+            קבלו הצעה מותאמת בוואטסאפ
           </a>
           <a className="button secondary" href="tel:+972503502615">
             <Phone aria-hidden="true" />

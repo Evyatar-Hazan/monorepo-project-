@@ -1,5 +1,5 @@
 import { type CSSProperties, type FormEvent, useCallback, useMemo, useState } from 'react';
-import { ContactSection, CoordinationSection, DetailsSection, EditorialSection, ExperienceLabSection, FaqSection, GallerySection, HeroSection, IntroBandSection, ManifestoSection, ProcessSection, RealMediaSection, SamplesSection, SeoSection, ServicesSection, SignatureSection, StorySection, TrustSection, BoutiqueSection } from './components/MainSections';
+import { AudienceSection, ContactSection, CoordinationSection, DetailsSection, EditorialSection, ExperienceLabSection, FaqSection, GallerySection, HeroSection, IntroBandSection, ManifestoSection, ProcessSection, RealMediaSection, SamplesSection, SeoSection, ServicesSection, SignatureSection, StorySection, TrustSection, BoutiqueSection } from './components/MainSections';
 import { FloatingActions, Footer, LightboxDialog, Topbar } from './components/SiteChrome';
 import { email, galleryImages, sectionIds, services, siteVersion, type GalleryCategory } from './data/siteContent';
 import { useAutoRotate } from './hooks/useAutoRotate';
@@ -101,6 +101,7 @@ function App() {
         <IntroBandSection />
         <ManifestoSection />
         <EditorialSection />
+        <AudienceSection />
         <ExperienceLabSection
           activeExperienceIndex={activeExperienceIndex}
           onChangeExperience={setActiveExperienceIndex}
