@@ -1,0 +1,157 @@
+import { type RefObject } from 'react';
+import { ChevronLeft, ChevronRight, MessageCircle, Phone, X } from 'lucide-react';
+import { navItems, phoneDisplay, phoneHref } from '../data/siteContent';
+
+interface TopbarProps {
+  readonly activeNavSection: string;
+  readonly isScrolled: boolean;
+  readonly topbarWhatsapp: string;
+}
+
+export const Topbar = ({ activeNavSection, isScrolled, topbarWhatsapp }: TopbarProps) => (
+  <header className={isScrolled ? 'topbar is-scrolled' : 'topbar'} aria-label="ניווט ראשי">
+    <a className="brand" href="#top" aria-label="nis, Boutique Catering">
+      <img className="brand-logo" src="/brand/nis-logo.svg" alt="nis - Boutique Catering" />
+    </a>
+    <nav className="nav-links">
+      {navItems.map((item) => (
+        <a
+          key={item.href}
+          href={item.href}
+          className={activeNavSection === item.href ? 'is-active' : undefined}
+        >
+          {item.label}
+        </a>
+      ))}
+    </nav>
+    <a className="topbar-cta" href={topbarWhatsapp} data-event="topbar_whatsapp">
+      <MessageCircle aria-hidden="true" size={18} />
+      וואטסאפ
+    </a>
+  </header>
+);
+
+export const Footer = ({
+  email,
+  footerWhatsapp,
+}: {
+  readonly email: string;
+  readonly footerWhatsapp: string;
+}) => (
+  <footer className="site-footer">
+    <div className="container footer-grid">
+      <div className="footer-brand">
+        <strong>nis</strong>
+        <span>Boutique Catering</span>
+        <p>אוכל של בית, גימור של בוטיק.</p>
+      </div>
+      <div className="footer-links">
+        <a href={phoneHref}>{phoneDisplay}</a>
+        <a href={`mailto:${email}`}>{email}</a>
+        <a href={footerWhatsapp}>וואטסאפ</a>
+      </div>
+    </div>
+  </footer>
+);
+
+export const FloatingActions = ({ floatingWhatsapp }: { readonly floatingWhatsapp: string }) => (
+  <>
+    <a className="floating-whatsapp" href={floatingWhatsapp} aria-label="דברו איתנו בוואטסאפ">
+      <MessageCircle aria-hidden="true" />
+    </a>
+
+    <div className="mobile-sticky-cta" aria-label="פעולות מהירות ליצירת קשר">
+      <a href={floatingWhatsapp}>
+        <MessageCircle aria-hidden="true" size={18} />
+        וואטסאפ
+      </a>
+      <a href={phoneHref}>
+        <Phone aria-hidden="true" size={18} />
+        טלפון
+      </a>
+    </div>
+  </>
+);
+
+interface LightboxDialogProps {
+  readonly dialogRef: RefObject<HTMLDivElement | null>;
+  readonly image: {
+    readonly alt: string;
+    readonly src: string;
+    readonly title: string;
+  } | null;
+  readonly imageCount: number;
+  readonly onClose: () => void;
+  readonly onNext: () => void;
+  readonly onPrevious: () => void;
+}
+
+export const LightboxDialog = ({
+  dialogRef,
+  image,
+  imageCount,
+  onClose,
+  onNext,
+  onPrevious,
+}: LightboxDialogProps) => {
+  if (!image) {
+    return null;
+  }
+
+  return (
+    <div
+      ref={dialogRef}
+      className="lightbox"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="lightbox-caption"
+      tabIndex={-1}
+    >
+      <button
+        className="lightbox-backdrop"
+        type="button"
+        tabIndex={-1}
+        onClick={onClose}
+        aria-label="סגור תצוגת תמונה"
+      />
+      <button
+        className="lightbox-close"
+        type="button"
+        onClick={onClose}
+        aria-label="סגור תמונה"
+      >
+        <X aria-hidden="true" />
+      </button>
+      {imageCount > 1 ? (
+        <>
+          <button
+            className="lightbox-nav lightbox-next"
+            type="button"
+            onClick={(event) => {
+              event.stopPropagation();
+              onNext();
+            }}
+            aria-label="תמונה הבאה"
+          >
+            <ChevronLeft aria-hidden="true" />
+          </button>
+          <button
+            className="lightbox-nav lightbox-prev"
+            type="button"
+            onClick={(event) => {
+              event.stopPropagation();
+              onPrevious();
+            }}
+            aria-label="תמונה קודמת"
+          >
+            <ChevronRight aria-hidden="true" />
+          </button>
+        </>
+      ) : null}
+      <img src={image.src} alt={image.alt} />
+      <p id="lightbox-caption" className="lightbox-caption">
+        {image.title}
+      </p>
+    </div>
+  );
+};
