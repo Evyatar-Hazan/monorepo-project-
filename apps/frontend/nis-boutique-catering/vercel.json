@@ -3,5 +3,18 @@
   "devCommand": "npx pnpm@9.15.9 dev",
   "framework": "vite",
   "installCommand": "npx pnpm@9.15.9 install --ignore-scripts",
-  "outputDirectory": "dist"
+  "outputDirectory": "dist",
+  "redirects": [
+    {
+      "source": "/(.*)",
+      "has": [
+        {
+          "type": "host",
+          "value": "www.nisboutiquecatering.com"
+        }
+      ],
+      "destination": "https://nisboutiquecatering.com/$1",
+      "permanent": true
+    }
+  ]
 }
