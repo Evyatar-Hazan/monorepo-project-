@@ -11,7 +11,7 @@ interface TopbarProps {
 export const Topbar = ({ activeNavSection, isScrolled, topbarWhatsapp }: TopbarProps) => (
   <header className={isScrolled ? 'topbar is-scrolled' : 'topbar'} aria-label="ניווט ראשי">
     <a className="brand" href="#top" aria-label="nis, Boutique Catering">
-      <img className="brand-logo" src="/brand/nis-logo.svg" alt="nis - Boutique Catering" />
+      <img className="brand-logo" src="/brand/nis-logo.svg" alt="nis - Boutique Catering" decoding="async" />
     </a>
     <nav className="nav-links">
       {navItems.map((item) => (
@@ -148,7 +148,7 @@ export const LightboxDialog = ({
           </button>
         </>
       ) : null}
-      <img src={image.src} alt={image.alt} />
+      <img src={image.src} alt={image.alt} decoding="async" />
       <p id="lightbox-caption" className="lightbox-caption">
         {image.title}
       </p>

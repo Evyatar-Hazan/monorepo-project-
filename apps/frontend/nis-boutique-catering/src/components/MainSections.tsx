@@ -54,7 +54,7 @@ export const HeroSection = ({ heroWhatsapp }: { readonly heroWhatsapp: string })
       loop
       muted
       playsInline
-      preload="metadata"
+      preload="none"
       poster={foodMedia.hostingTableOverview}
     >
       <source src={foodMedia.eventVideo} type="video/mp4" />
@@ -120,14 +120,37 @@ export const HeroSection = ({ heroWhatsapp }: { readonly heroWhatsapp: string })
       </div>
       <div className="hero-showcase reveal is-visible" aria-label="תמונות אירוח של nis">
         <div className="hero-stage-frame">
-          <img className="hero-plate primary-plate" src={foodMedia.salmonSkewersLemon} alt="שיפודי סלמון עם לימון" />
+          <img
+            className="hero-plate primary-plate"
+            src={foodMedia.salmonSkewersLemon}
+            alt="שיפודי סלמון עם לימון"
+            loading="eager"
+            fetchPriority="high"
+            decoding="async"
+            width={1500}
+            height={2000}
+          />
           <div className="hero-stage-caption">
             <strong>שבתות, אירוח קטן ומארזים</strong>
             <span>אותה שפה של טעם, נראות ושקט למארח.</span>
           </div>
         </div>
-        <img className="hero-plate side-plate" src={foodMedia.dipsTrayClose} alt="מגש מטבלים צבעוני" />
-        <img className="hero-plate tall-plate" src={foodMedia.tableSettingBlueGold} alt="שולחן ערוך לאירוח" />
+        <img
+          className="hero-plate side-plate"
+          src={foodMedia.dipsTrayClose}
+          alt="מגש מטבלים צבעוני"
+          decoding="async"
+          width={2000}
+          height={1500}
+        />
+        <img
+          className="hero-plate tall-plate"
+          src={foodMedia.tableSettingBlueGold}
+          alt="שולחן ערוך לאירוח"
+          decoding="async"
+          width={1500}
+          height={2000}
+        />
         <div className="hero-scene-notes" aria-hidden="true">
           {heroSceneNotes.map((note) => (
             <article key={note.title} className="hero-scene-note">
@@ -190,7 +213,7 @@ export const ManifestoSection = () => (
             key={moment.title}
             style={{ '--delay': `${index * 80}ms` } as CSSProperties}
           >
-            <img src={moment.image} alt="" loading="lazy" />
+            <img src={moment.image} alt="" loading="lazy" decoding="async" />
             <div className="manifesto-card-copy">
               <span>{moment.label}</span>
               <h3>{moment.title}</h3>
@@ -217,7 +240,7 @@ export const EditorialSection = () => (
               key={card.title}
               style={{ '--delay': `${index * 70}ms` } as CSSProperties}
             >
-              <img src={card.image} alt="" loading="lazy" />
+              <img src={card.image} alt="" loading="lazy" decoding="async" />
               <div className="editorial-copy">
                 <span>{card.label}</span>
                 <Icon aria-hidden="true" className="card-icon" />
@@ -317,7 +340,7 @@ export const ExperienceLabSection = ({
                 hidden={!isActive}
               >
                 <div className="experience-frame">
-                  <img src={service.image} alt="" loading="lazy" />
+                  <img src={service.image} alt="" loading="lazy" decoding="async" />
                   <div className="experience-overlay">
                     <span>0{index + 1}</span>
                     <h3>{service.title}</h3>
@@ -351,7 +374,7 @@ export const SignatureSection = () => (
             key={moment.title}
             style={{ '--delay': `${index * 80}ms` } as CSSProperties}
           >
-            <img src={moment.image} alt="" loading="lazy" />
+            <img src={moment.image} alt="" loading="lazy" decoding="async" />
             <div>
               <span>0{index + 1}</span>
               <h3>{moment.title}</h3>
@@ -404,7 +427,7 @@ export const ServicesSection = () => (
           const Icon = service.icon;
           return (
             <article className="service-card reveal" key={service.title}>
-              <img src={service.image} alt="" loading="lazy" />
+              <img src={service.image} alt="" loading="lazy" decoding="async" />
               <div className="service-body">
                 <Icon aria-hidden="true" className="card-icon" />
                 <h3>{service.title}</h3>
@@ -475,7 +498,13 @@ export const StorySection = () => (
           ))}
         </div>
       </div>
-      <img className="reveal" src={foodMedia.tableSettingBlueGold} alt="שולחן אירוח ערוך ומוכן לאורחים" loading="lazy" />
+      <img
+        className="reveal"
+        src={foodMedia.tableSettingBlueGold}
+        alt="שולחן אירוח ערוך ומוכן לאורחים"
+        loading="lazy"
+        decoding="async"
+      />
     </div>
   </section>
 );
@@ -545,7 +574,7 @@ export const RealMediaSection = () => (
           הראשון. התמונות והווידאו כאן הם מהכנות אמיתיות של nis.
         </p>
       </div>
-      <video className="reveal" controls muted playsInline preload="metadata" poster={foodMedia.hostingTableOverview}>
+      <video className="reveal" controls muted playsInline preload="none" poster={foodMedia.hostingTableOverview}>
         <source src={foodMedia.eventVideo} type="video/mp4" />
       </video>
     </div>
@@ -596,7 +625,7 @@ export const GallerySection = ({
             onClick={() => onOpenImage(index)}
             aria-label={`פתח תמונה: ${image.title}`}
           >
-            <img src={image.src} alt={image.alt} loading="lazy" />
+            <img src={image.src} alt={image.alt} loading="lazy" decoding="async" />
             <span>{image.title}</span>
           </button>
         ))}
