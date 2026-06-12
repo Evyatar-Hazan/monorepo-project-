@@ -75,6 +75,11 @@ interface SimpleCard {
   readonly icon: LucideIcon;
 }
 
+interface EditorialCard extends SimpleCard {
+  readonly label: string;
+  readonly image: string;
+}
+
 interface StoryMoment {
   readonly title: string;
   readonly text: string;
@@ -152,48 +157,72 @@ const services: readonly Service[] = [
   },
 ];
 
-const fitCards: readonly SimpleCard[] = [
+const editorialCards: readonly EditorialCard[] = [
   {
-    title: 'משפחות שרוצות שבת מפנקת',
-    text: 'שבת מלאה בטעם, בלי לחץ של בישולים וריצות של הרגע האחרון.',
-    icon: HeartHandshake,
+    label: 'שבתות',
+    title: 'אוכל ביתי מוקפד לשבת שנכנסת ברוגע',
+    text: 'תפריטי שבת עשירים, מסודרים ויפים להגשה, כדי שהבית ירגיש מלא בלי שכל העומס יישב עליכם.',
+    icon: ChefHat,
+    image: foodMedia.salmonSkewersLemon,
   },
   {
-    title: 'מארחים שאוהבים שולחן מוקפד',
-    text: 'אירוח שנראה נקי, מרשים ואסתטי כבר מהרגע שהמגש נפתח.',
+    label: 'אירועים קטנים',
+    title: 'שולחן שנפתח יפה ומייצר רושם כבר בדקה הראשונה',
+    text: 'מגשי אירוח, פינגר פוד ושולחנות קטנים עם הגשה אסתטית שמתאימה למשפחה, מפגש או אירוח עסקי.',
+    icon: Sparkles,
+    image: foodMedia.hostingTableOverview,
+  },
+  {
+    label: 'מארזים ודרך',
+    title: 'Travel nis לפינוקים שלוקחים אתכם הלאה',
+    text: 'מארזים נוחים, חכמים ויפים לנסיעות, טיולים וימי כיף, כך שהחוויה מתחילה כבר בדרך.',
+    icon: Gift,
+    image: foodMedia.miniSandwiches,
+  },
+];
+
+const boutiqueReasons: readonly SimpleCard[] = [
+  {
+    title: 'התאמה לפני סגירה',
+    text: 'כל הזמנה מתחילה בשיחה קצרה על סוג האירוח, מספר הסועדים והתחושה שרוצים ליצור.',
+    icon: ClipboardList,
+  },
+  {
+    title: 'הגשה שנראית נקייה ומכובדת',
+    text: 'לא רק אוכל טעים, אלא שולחן שנפתח יפה ומרגיש מסודר כבר בלי להתעסק עם כל פרט.',
     icon: Sparkles,
   },
   {
-    title: 'אירועים קטנים ועסקיים',
-    text: 'מגשים ופינגר פוד לפגישות, הרמות כוסית, ימי הולדת ומפגשים משפחתיים.',
-    icon: Users,
+    title: 'אריזה שממשיכה את המותג',
+    text: 'מגשים, מארזים ופרטים קטנים שמחזיקים את תחושת הבוטיק גם בדרך וגם בהגשה.',
+    icon: Package,
   },
   {
-    title: 'נסיעות ורגעים מיוחדים',
-    text: 'מארזים נוחים ויפים לטיולים, פיקניקים וימים שרוצים להפוך לחוויה.',
-    icon: Gift,
+    title: 'שירות אישי מתחילתו ועד סופו',
+    text: 'אתם לא נופלים על תפריט קבוע. אנחנו בונים יחד פתרון שמתאים לאירוח הספציפי שלכם.',
+    icon: HeartHandshake,
   },
 ];
 
 const processSteps: readonly SimpleCard[] = [
   {
     title: 'יוצרים קשר',
-    text: 'פונים בוואטסאפ, בטלפון או במייל ומספרים מה מתכננים.',
+    text: 'שולחים הודעה קצרה עם התאריך, סוג האירוח והכיוון הכללי.',
     icon: MessageCircle,
   },
   {
-    title: 'מגדירים את האירוח',
-    text: 'סוג האירוע, תאריך רצוי, מספר סועדים והעדפות חשובות.',
+    title: 'מחדדים את התמונה',
+    text: 'מבינים יחד אם מדובר בשבת, אירוע קטן או מארזים, וכמה אנשים אתם רוצים לארח.',
     icon: CalendarDays,
   },
   {
-    title: 'מרכיבים תפריט אישי',
-    text: 'בונים יחד פתרון שמתאים בדיוק לאופי האירוח ולסגנון שלכם.',
+    title: 'מרכיבים התאמה אישית',
+    text: 'בונים כיוון של תפריט, הגשה ופרטים קטנים שמחברים בין הטעם לבין המראה.',
     icon: ClipboardList,
   },
   {
     title: 'מקבלים מוכן להגשה',
-    text: 'אוכל מוקפד, ארוז יפה ומוכן להיכנס לשולחן ברוגע.',
+    text: 'האוכל מגיע מסודר, אסתטי ונוח להגשה, כדי שתוכלו לארח בכבוד ובלי לחץ.',
     icon: CheckCircle2,
   },
 ];
@@ -201,7 +230,7 @@ const processSteps: readonly SimpleCard[] = [
 const menuGroups: readonly MenuGroup[] = [
   {
     title: 'תפריט שבת לדוגמה',
-    intro: 'כיוון קלאסי לשבת רגועה, עם אוכל שמגיע מוכן ומסודר לשולחן.',
+    intro: 'כיוון לשולחן שבת שמרגיש מלא, מכובד ונוח להגשה.',
     items: [
       'מבחר סלטים לשולחן',
       'דגים לשבת',
@@ -212,7 +241,7 @@ const menuGroups: readonly MenuGroup[] = [
   },
   {
     title: 'מגשי אירוח ופינגר פוד',
-    intro: 'פתרון לאירוח קטן, מפגש משפחתי או אירוח עסקי שרוצה להיראות מוקפד.',
+    intro: 'פתרון לאירוח קטן שרוצה להרגיש מוקפד ולא גנרי.',
     items: [
       'מגש מלוח מעוצב',
       'מיני קישים ומאפים אישיים',
@@ -223,7 +252,7 @@ const menuGroups: readonly MenuGroup[] = [
   },
   {
     title: 'Travel nis לדרך',
-    intro: 'מארזים נוחים, יפים וטעימים לרגעים שממשיכים מחוץ לבית.',
+    intro: 'מארזים יפים ונוחים לרגעים מיוחדים שמתחילים כבר ביציאה מהבית.',
     items: [
       'ערכת פיקניק זוגית',
       'ערכת דרך משפחתית',
@@ -370,9 +399,9 @@ const galleryImages: readonly GalleryImage[] = [
 ];
 
 const heroStats: readonly Readonly<{ value: string; label: string }>[] = [
-  { value: '3', label: 'חוויות אירוח' },
-  { value: '14', label: 'רגעים אמיתיים בגלריה' },
-  { value: '1', label: 'שיחה אישית לפני הזמנה' },
+  { value: 'שבתות', label: 'אוכל ביתי מוקפד, מוכן להגשה' },
+  { value: 'אירוח קטן', label: 'מגשים ושולחנות שנראים כמו בוטיק' },
+  { value: 'Travel nis', label: 'מארזים חכמים לדרך ולרגעים מיוחדים' },
 ];
 
 const signatureMoments: readonly Readonly<{ title: string; text: string; image: string }>[]= [
@@ -383,12 +412,12 @@ const signatureMoments: readonly Readonly<{ title: string; text: string; image: 
   },
   {
     title: 'ביסים קטנים, רושם גדול',
-    text: 'פינגר פוד וכריכונים שנוחים להגשה, לצילום ולאכילה.',
+    text: 'פינגר פוד, כריכונים ומנות אישיות שנוחים להגשה, לצילום ולאכילה.',
     image: foodMedia.miniSandwiches,
   },
   {
     title: 'פרטים שמרגישים בוטיק',
-    text: 'קפה, עריכה, אריזה ותיאום קטן שמסדרים את כל החוויה.',
+    text: 'קפה, עריכה, אריזה ותיאום קטן שמסדרים את כל החוויה סביבכם.',
     image: foodMedia.coffeeServiceClose,
   },
 ];
@@ -417,7 +446,7 @@ const trustCards: readonly SimpleCard[] = [
   },
   {
     title: 'התאמה לפני סגירה',
-    text: 'לפני שמתקדמים עוברים על סוג האירוח, מספר הסועדים והעדפות חשובות.',
+    text: 'לפני שמתקדמים עוברים יחד על סוג האירוח, מספר הסועדים והעדפות חשובות.',
     icon: ClipboardList,
   },
   {
@@ -642,35 +671,29 @@ function App() {
           <div className="hero-layout">
             <div className="hero-content reveal is-visible">
               <p className="eyebrow">מהרובע היהודי לביתר עילית</p>
-              <h1 id="hero-title" aria-label="nis">
-                {'nis'.split('').map((letter, index) => (
-                  <span
-                    aria-hidden="true"
-                    key={letter}
-                    style={{ '--letter-index': index } as CSSProperties}
-                  >
-                    {letter}
-                  </span>
-                ))}
+              <p className="hero-brand-subtitle">nis Boutique Catering</p>
+              <h1 id="hero-title">
+                קייטרינג בוטיק ביתי
+                <br />
+                לשבתות ואירועים קטנים
               </h1>
-              <p className="hero-brand-subtitle">Boutique Catering</p>
-              <p className="hero-kicker">אירוח שנראה כמו בוטיק, ומרגיש כמו בית.</p>
+              <p className="hero-kicker">אוכל מוקפד, הגשה אסתטית ושירות אישי, כדי לארח בכבוד, ברוגע ובלי להתעסק עם כל הפרטים.</p>
               <p className="hero-text">
-                מאחורי nis עומדת יהודית ניסטנפובר, שמביאה לשולחן זיכרון של בתים
-                פתוחים, ריח של שבת ואירוח שמרגיש אישי. היום זה הופך לקייטרינג
-                בוטיק מביתר עילית: שבתות, מגשי אירוח ומארזי דרך שנבנים סביבכם.
+                nis מחברת בין אוכל ביתי מוקפד לבין שפה של בוטיק: שבתות עשירות,
+                אירוח קטן שמרגיש מכובד, ומארזים יפים לדרך. הכול נבנה סביב סוג
+                האירוח שלכם, עם התאמה אישית ותחושה שהכול כבר מסודר.
               </p>
               <div className="hero-actions" aria-label="פעולות ראשיות">
                 <a className="button primary" href={heroWhatsapp} data-event="hero_whatsapp">
                   <MessageCircle aria-hidden="true" />
-                  דברו איתנו בוואטסאפ
+                  קבלו תפריט מותאם בוואטסאפ
                 </a>
-                <a className="button secondary" href="#gallery">
+                <a className="button secondary" href="#experiences">
                   <Camera aria-hidden="true" />
-                  לראות את השולחן
+                  צפו באפשרויות הזמנה
                 </a>
               </div>
-              <p className="microcopy">שיחה קצרה, התאמה אישית, והצעת מחיר לפי האירוח שלכם.</p>
+              <p className="microcopy">שיחה קצרה, התאמה אישית, והכוונה ברורה לפי האירוח, הכמות והתאריך.</p>
               <div className="hero-badges" aria-label="נקודות אמון">
                 <span>
                   <ChefHat aria-hidden="true" size={16} />
@@ -719,25 +742,56 @@ function App() {
         <section className="section intro-band reveal" aria-label="בידול">
           <div className="container intro-grid">
             <div>
-              <p className="eyebrow">הבטחת המותג</p>
-              <h2>מהרובע היהודי ועד השולחן שלכם: אירוח שמרגיש אישי באמת.</h2>
+              <p className="eyebrow">רעיון אחד ברור</p>
+              <h2>אוכל ביתי מוקפד, בהגשה של בוטיק, לאירוח קטן שמרגיש גדול.</h2>
             </div>
             <p>
-              nis נולדה מהחיבור בין אוכל של בית לבין גימור של בוטיק. זו לא רק
-              הזמנה של מנות, אלא דרך להיכנס לשבת, לארח משפחה או לצאת לדרך עם
-              תחושה שמישהו סידר עבורכם את הפרטים הקטנים.
+              במקום לנסות להיות הכול, nis בנויה סביב שלוש חוויות ברורות:
+              שבתות, אירועים קטנים ומארזים לדרך. החוט שמחבר ביניהן הוא אותו
+              חוט: אוכל שמרגיש חם וביתי, נראות נקייה ומכובדת, ושירות אישי שלא
+              משאיר אתכם לבד עם הפרטים.
             </p>
+          </div>
+        </section>
+
+        <section className="section editorial-section" aria-labelledby="editorial-title">
+          <div className="container">
+            <div className="section-heading reveal">
+              <p className="eyebrow">מה מזמינים אצלנו</p>
+              <h2 id="editorial-title">שלוש קטגוריות ברורות. שפה אחת של אירוח.</h2>
+            </div>
+            <div className="editorial-grid">
+              {editorialCards.map((card, index) => {
+                const Icon = card.icon;
+
+                return (
+                  <article
+                    className="editorial-card reveal"
+                    key={card.title}
+                    style={{ '--delay': `${index * 70}ms` } as CSSProperties}
+                  >
+                    <img src={card.image} alt="" loading="lazy" />
+                    <div className="editorial-copy">
+                      <span>{card.label}</span>
+                      <Icon aria-hidden="true" className="card-icon" />
+                      <h3>{card.title}</h3>
+                      <p>{card.text}</p>
+                    </div>
+                  </article>
+                );
+              })}
+            </div>
           </div>
         </section>
 
         <section className="section experience-lab-section" aria-labelledby="experience-lab-title">
           <div className="container experience-lab">
             <div className="experience-copy reveal">
-              <p className="eyebrow">Experience Lab</p>
-              <h2 id="experience-lab-title">בחרו את הרגע, והאתר משנה קצב סביבו.</h2>
+              <p className="eyebrow">בחרו את החוויה</p>
+              <h2 id="experience-lab-title">מהרגע שבוחרים כיוון, כל האתר מתחיל להרגיש יותר מדויק.</h2>
               <p>
-                במקום לדפדף בתפריט רגיל, בוחרים את סוג האירוח ומקבלים תחושה מיידית
-                של מה ייפתח על השולחן: שבת רגועה, מגשי אירוח או מארז דרך.
+                במקום לקרוא רשימה יבשה, בוחרים את סוג האירוח ורואים מיד איך nis
+                מדמיינת אותו: מה נפתח על השולחן, מה מקבלים, ואיך זה מרגיש בפועל.
               </p>
               <div className="experience-switcher" role="tablist" aria-label="בחירת חוויית אירוח">
                 {services.map((service, index) => {
@@ -790,8 +844,8 @@ function App() {
         <section className="section signature-section" aria-labelledby="signature-title">
           <div className="container">
             <div className="section-heading reveal">
-              <p className="eyebrow">החוויה לפני התפריט</p>
-              <h2 id="signature-title">לא רק מה מגישים, אלא איך השולחן מרגיש כשהוא נפתח.</h2>
+              <p className="eyebrow">למה זה בוטיק</p>
+              <h2 id="signature-title">בוטיק זו לא מילה. זו הדרך שבה כל פרט מרגיש נכון יותר.</h2>
             </div>
             <div className="signature-grid">
               {signatureMoments.map((moment, index) => (
@@ -808,6 +862,36 @@ function App() {
                   </div>
                 </article>
               ))}
+            </div>
+          </div>
+        </section>
+
+        <section className="section boutique-section" aria-labelledby="boutique-title">
+          <div className="container boutique-layout">
+            <div className="boutique-copy reveal">
+              <p className="eyebrow">למה לבחור בנו</p>
+              <h2 id="boutique-title">אירוח טוב לא צריך להרגיש תעשייתי. הוא צריך להרגיש אישי, חם ומכובד.</h2>
+              <p>
+                מאחורי nis עומדת מחשבה על כל רגע שהאורחים פוגשים: מהמראה של
+                השולחן, דרך האריזה, ועד תחושת השקט של מי שמארח. בדיוק שם
+                המילה Boutique מקבלת הוכחה אמיתית.
+              </p>
+            </div>
+            <div className="boutique-grid">
+              {boutiqueReasons.map((reason, index) => {
+                const Icon = reason.icon;
+                return (
+                  <article
+                    className="boutique-card reveal"
+                    key={reason.title}
+                    style={{ '--delay': `${index * 65}ms` } as CSSProperties}
+                  >
+                    <Icon aria-hidden="true" className="card-icon" />
+                    <h3>{reason.title}</h3>
+                    <p>{reason.text}</p>
+                  </article>
+                );
+              })}
             </div>
           </div>
         </section>
@@ -857,32 +941,11 @@ function App() {
           </div>
         </section>
 
-        <section className="section soft-section" aria-labelledby="fit-title">
-          <div className="container">
-            <div className="section-heading reveal">
-              <p className="eyebrow">למי זה מתאים?</p>
-              <h2 id="fit-title">למי nis מתאימה במיוחד?</h2>
-            </div>
-            <div className="compact-grid">
-              {fitCards.map((card) => {
-                const Icon = card.icon;
-                return (
-                  <article className="compact-card reveal" key={card.title}>
-                    <Icon aria-hidden="true" className="card-icon" />
-                    <h3>{card.title}</h3>
-                    <p>{card.text}</p>
-                  </article>
-                );
-              })}
-            </div>
-          </div>
-        </section>
-
         <section id="process" className="section" aria-labelledby="process-title">
           <div className="container">
             <div className="section-heading reveal">
               <p className="eyebrow">איך זה עובד</p>
-              <h2 id="process-title">ארבעה צעדים פשוטים לאירוח רגוע.</h2>
+              <h2 id="process-title">המסלול ברור: רואים אוכל, מבינים התאמה, ואז פונים בלי היסוס.</h2>
             </div>
             <div className="process-list">
               {processSteps.map((step, index) => {
@@ -903,16 +966,16 @@ function App() {
         <section className="section story-section" aria-labelledby="story-title">
           <div className="container story-grid">
             <div className="story-copy reveal">
-              <p className="eyebrow">הסיפור מאחורי nis</p>
-              <h2 id="story-title">אוכל שיש בו נשמה, סדר, יופי וחום של בית.</h2>
+              <p className="eyebrow">הסיפור של המותג</p>
+              <h2 id="story-title">nis נולדה מתוך אהבה לאירוח יפה, אוכל ביתי מדויק ותשומת לב לפרטים הקטנים.</h2>
               <p>
-                מאחורי nis עומדת יהודית ניסטנפובר, עם אהבה עמוקה
-                לאירוח, לאוכל מוקפד ולרגעים הקטנים שהופכים ארוחה לחוויה.
+                מאחורי nis עומדת יהודית ניסטנפובר, עם אהבה עמוקה לאירוח, לאוכל
+                מוקפד ולרגעים הקטנים שהופכים ארוחה לחוויה.
               </p>
               <p>
-                אחרי שנים של חיים ברובע היהודי, בין סמטאות אבן, בתים מלאי ריח של
-                שבת ושולחנות שנפתחים לאנשים שאוהבים, יהודית מביאה למטבח של nis
-                חיבור בין ביתיות, אסתטיקה ושירות אישי.
+                אחרי שנים של חיים ברובע היהודי, בין סמטאות אבן, בתים מלאי ריח
+                של שבת ושולחנות שנפתחים לאנשים שאוהבים, יהודית מביאה למטבח של
+                nis חיבור בין ביתיות, אסתטיקה ושירות אישי.
               </p>
               <p>
                 כל הזמנה נבנית מתוך תשומת לב לפרטים הקטנים: חומרי גלם טריים,
@@ -939,8 +1002,8 @@ function App() {
         <section id="samples" className="section soft-section" aria-labelledby="samples-title">
           <div className="container">
             <div className="section-heading sample-heading reveal">
-              <p className="eyebrow">תפריטים ומארזים לדוגמה</p>
-              <h2 id="samples-title">רעיונות מוחשיים שמותאמים לכל אירוח.</h2>
+              <p className="eyebrow">כיוונים שאפשר להתחיל מהם</p>
+              <h2 id="samples-title">לא תפריט סגור. כן תחושת כיוון ברורה יותר לשיחה.</h2>
               <p>
                 הדוגמאות כאן נועדו לפתוח כיוון ולהפוך את ההזמנה למוחשית יותר.
                 כל הזמנה מותאמת אישית, והצעת מחיר ניתנת אחרי שיחה קצרה לפי סוג
@@ -990,8 +1053,8 @@ function App() {
         <section className="section real-media-section" aria-labelledby="real-media-title">
           <div className="container real-media-grid">
             <div className="reveal">
-              <p className="eyebrow">רגע אמיתי מהמטבח</p>
-              <h2 id="real-media-title">ככה נראית תשומת לב לפני שהאירוח מגיע לשולחן.</h2>
+              <p className="eyebrow">וידאו אמיתי</p>
+              <h2 id="real-media-title">ככה נראית תשומת לב לפני שהאירוח בכלל פוגש את האורחים.</h2>
               <p>
                 מנות אישיות, אריזה נקייה, מדבקת nis ופרטים קטנים שמסדרים את
                 החוויה עוד לפני הביס הראשון. התמונות והווידאו כאן הם מהכנות
@@ -1015,7 +1078,7 @@ function App() {
           <div className="container">
             <div className="section-heading gallery-heading reveal">
               <p className="eyebrow">גלריה</p>
-              <h2 id="gallery-title">קודם רואים, אחר כך מרגישים בטוחים לפנות.</h2>
+              <h2 id="gallery-title">אם זו חוויית בוטיק, היא צריכה להוכיח את עצמה בתמונה הראשונה.</h2>
               <p>
                 גלריה אמיתית מהאירוח: שולחנות, מגשים, סלטים, קפה ופרטים קטנים
                 שמראים איך nis נראית כשהיא מגיעה לשולחן.
@@ -1097,8 +1160,8 @@ function App() {
         <section className="section trust-section" aria-labelledby="trust-title">
           <div className="container">
             <div className="section-heading reveal">
-              <p className="eyebrow">למה אפשר לסמוך על nis</p>
-              <h2 id="trust-title">פחות ניחושים, יותר ודאות לפני שמזמינים.</h2>
+              <p className="eyebrow">מה מרגיע לפני שסוגרים</p>
+              <h2 id="trust-title">פחות סימני שאלה, יותר תחושה שיש עם מי לדבר.</h2>
             </div>
             <div className="testimonial-grid">
               {trustCards.map((card) => {
@@ -1136,10 +1199,10 @@ function App() {
           <div className="container contact-grid">
             <div className="contact-copy reveal">
               <p className="eyebrow">יצירת קשר</p>
-              <h2 id="contact-title">נשמח לקחת חלק בשמחה שלכם.</h2>
+              <h2 id="contact-title">רוצים לארח יפה בלי לעבוד קשה? מכאן ממשיכים לוואטסאפ.</h2>
               <p>
-                ספרו לנו מה אתם מתכננים, ונרכיב יחד תפריט מדויק, יפה וטעים לאירוח
-                שלכם.
+                ספרו לנו אם מדובר בשבת, אירוע קטן או מארזים לדרך, ונרכיב יחד
+                כיוון שמתאים לאופי האירוח שלכם.
               </p>
               <div className="contact-actions">
                 <a className="button primary" href={contactWhatsapp} data-event="contact_whatsapp">
