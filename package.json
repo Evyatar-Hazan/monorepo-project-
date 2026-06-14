@@ -1,15 +1,15 @@
 {
-  "name": "evyatar-monorepo",
+  "name": "nis-boutique-catering-monorepo",
   "version": "1.0.0",
-  "description": "Monorepo for all Evyatar projects",
+  "description": "Monorepo for the nis Boutique Catering website",
   "private": true,
-  "packageManager": "pnpm@9.0.0",
+  "packageManager": "pnpm@9.15.9",
   "engines": {
     "node": ">=18.0.0",
-    "pnpm": ">=9.0.0"
+    "pnpm": ">=9.15.9"
   },
   "scripts": {
-    "dev": "turbo run dev --parallel",
+    "dev": "turbo run dev --filter @monorepo/nis-boutique-catering",
     "build": "turbo run build",
     "lint": "turbo run lint",
     "format": "turbo run format",
@@ -21,8 +21,6 @@
     "turbo": "^2.0.0"
   },
   "workspaces": [
-    "apps/frontend/*",
-    "apps/backend/*",
-    "packages/*"
+    "apps/frontend/nis-boutique-catering"
   ]
 }

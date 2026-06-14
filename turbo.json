@@ -3,8 +3,8 @@
   "globalDependencies": ["**/.env", "**/.env.local"],
   "tasks": {
     "build": {
-      "dependsOn": ["^build", "type-check"],
-      "outputs": [".next/**", "dist/**", "build/**"],
+      "dependsOn": ["type-check"],
+      "outputs": ["dist/**"],
       "cache": true
     },
     "dev": {
@@ -20,7 +20,7 @@
       "cache": true
     },
     "test": {
-      "outputs": ["coverage/**"],
+      "outputs": [],
       "cache": true
     },
     "type-check": {
